@@ -1,10 +1,11 @@
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
 from import_export.formats.base_formats import XLSX, CSV
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv('../.env')
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
