@@ -1,10 +1,11 @@
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
 from import_export.formats.base_formats import XLSX, CSV
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv('../.env')
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
@@ -58,11 +59,11 @@ WSGI_APPLICATION = 'root.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
-        'PASSWORD': os.getenv('DB_PASSWORD')
+        'NAME': 'cargo_bot_db',
+        'USER': 'postgres',
+        'HOST': 'localhost',
+        'PORT': 5432,
+        'PASSWORD': 1
     }
 }
 
