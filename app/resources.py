@@ -164,8 +164,13 @@ class ProductResource(resources.ModelResource):
         attribute='summary',
         widget=FloatWidget()
     )
-    is_arrived = Field(
+    is_china = Field(
         column_name='Пришло в Узб?',
+        attribute='is_arrived',
+        widget=BooleanWidget()
+    )
+    is_arrived = Field(
+        column_name='Не в Китае?',
         attribute='is_arrived',
         widget=BooleanWidget()
     )

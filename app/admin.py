@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from django.urls import resolve
 from import_export.admin import ImportExportActionModelAdmin
 
 from app.forms import ProductForm
@@ -12,18 +11,20 @@ from app.resources import UserResource, ReferalResource, ProductResource, Create
 # Register your models here.
 @admin.register(User)
 class UserAdmin(ImportExportActionModelAdmin):
-    list_display = (
-        'id_code', 'full_name', 'phone_number', 'qoshimcha_tel', 'summary', 'oldi_passport', 'orqa_passport', 'rasmi',
-        'referal')
+    list_display = [
+        'id_code', 'full_name', 'phone_number', 'qoshimcha_tel', 'summary',
+        'oldi_passport', 'orqa_passport', 'rasmi', 'referal'
+    ]
     resource_class = UserResource
-    search_fields = ('id_code', 'full_name', 'phone_number', 'phone_number2')
-    list_filter = ('id_code', 'full_name', 'phone_number', 'phone_number2', 'referal')
-    exclude = ("latitude", "longitude", "is_active", "tg_id", 'referal', 'lang')
+    search_fields = 'id_code', 'full_name', 'phone_number', 'phone_number2'
+    list_filter = 'id_code', 'full_name', 'phone_number', 'phone_number2', 'referal'
+    exclude = "latitude", "longitude", "is_active", "tg_id", 'referal', 'lang'
 
     def summary(self, obj):
         r = obj.products.all().values_list('summary', flat=True)
-        if len(r) > 1:
+        if len(r) >= 1:
             return sum(r)
+        return 0
 
     summary.short_description = 'Общая сумма'
 
@@ -57,10 +58,8 @@ class UserAdmin(ImportExportActionModelAdmin):
         else:
             return 'No image'
 
-
     def __str__(self):
         return f"{self.full_name} ({self.id_code})" if self.full_name and self.id_code else "Unnamed User"
-
 
     rasmi.short_description = "Фото"
 
@@ -85,7 +84,7 @@ class ReferalAdmin(ImportExportActionModelAdmin):
 
     def total_summary(self, obj):
         r = Product.objects.filter(user__referal=obj).values_list('summary', flat=True)
-        if len(r) > 1:
+        if len(r) >= 1:
             return r
 
     total_summary.short_description = "Общая сумма"
@@ -184,24 +183,26 @@ class ProductAdmin(ImportExportActionModelAdmin):
 
 @admin.register(CreatedAt)
 class CreatedAtAdmin(ImportExportActionModelAdmin):
-    list_display = ['id', 'date', 'consignment', 'expenses', 'transport_expenses', 'tax', 'add_expenses',
-                    'summary_weight',
-                    'kg',
-                    'general_sum', 'general_expenses', 'general_profit', 'kg1', 'from_who', 'to_who']
-    list_filter = ['date', 'consignment']
+    list_display = [
+        'id', 'date', 'consignment', 'expenses', 'transport_expenses',
+        'tax', 'add_expenses', 'summary_weight', 'kg', 'general_sum',
+        'general_expenses', 'general_profit', 'kg1', 'from_who',
+        'to_who', 'yuan_dollar', 'dollar_sum'
+    ]
+    list_filter = 'date', 'consignment'
     resource_class = CreatedAtResource
 
-    def summary_weight(self, obj):
-        r = obj.products.all().values_list('own_kg', flat=True)
-        if len(r) > 1:
+    @admin.display(description='Общий вес')
+    def summary_weight(self, obj: CreatedAt):
+        r = Product.objects.filter(consignment=obj).values_list('own_kg', flat=True)
+        if len(r) >= 1:
             return sum(r)
 
-    summary_weight.short_description = 'Общий вес'
-
-    def general_sum(self, obj):
+    def general_sum(self, obj: CreatedAt):
         r = obj.products.all().values_list('summary', flat=True)
-        if r:
-            return r
+        if len(r) >= 1:
+            return sum(r)
+        return 0
 
     general_sum.short_description = 'Суммарно'
 
@@ -216,7 +217,7 @@ class CreatedAtAdmin(ImportExportActionModelAdmin):
         r = obj.products.all().values_list('summary', flat=True)
         summary = 0
         expenses = 0
-        if len(r) > 1:
+        if len(r) >= 1:
             summary = sum(r)
         if obj.expenses and obj.transport_expenses and obj.tax and obj.add_expenses:
             expenses = obj.expenses + obj.transport_expenses + obj.tax + obj.add_expenses
