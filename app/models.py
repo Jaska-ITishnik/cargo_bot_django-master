@@ -79,7 +79,8 @@ class CreatedAt(models.Model):
                              verbose_name="KG")
     from_who = models.CharField(max_length=255, verbose_name="Kimdan")
     to_who = models.CharField(max_length=255, verbose_name="Kimga")
-
+    yuan_dollar = models.FloatField()
+    dollar_sum = models.FloatField()
     def __str__(self):
         return f"{self.date} -> {self.consignment}"
 
