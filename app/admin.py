@@ -197,6 +197,7 @@ class CreatedAtAdmin(ImportExportActionModelAdmin):
         r = Product.objects.filter(consignment=obj).values_list('own_kg', flat=True)
         if len(r) >= 1:
             return sum(r)
+        return 0
 
     def general_sum(self, obj: CreatedAt):
         r = obj.products.all().values_list('summary', flat=True)
