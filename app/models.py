@@ -1,8 +1,7 @@
-from django.db import models
-from dotenv import load_dotenv
 import os
 
-from utils import send_telegram_notification, arrived
+from django.db import models
+from dotenv import load_dotenv
 
 # Create your models here.
 
@@ -79,8 +78,9 @@ class CreatedAt(models.Model):
                              verbose_name="KG")
     from_who = models.CharField(max_length=255, verbose_name="Kimdan")
     to_who = models.CharField(max_length=255, verbose_name="Kimga")
-    yuan_dollar = models.FloatField()
-    dollar_sum = models.FloatField()
+    yuan_dollar = models.DecimalField(max_digits=5, decimal_places=2)
+    dollar_sum = models.DecimalField(max_digits=5, decimal_places=2)
+
     def __str__(self):
         return f"{self.date} -> {self.consignment}"
 
@@ -91,10 +91,9 @@ class CreatedAt(models.Model):
 
 
 class Product(models.Model):
-    consignment = models.ForeignKey(CreatedAt, on_delete=models.CASCADE, null=True, blank=True, related_name='products',
+    consignment = models.ForeignKey(CreatedAt, on_delete=models.CASCADE, related_name='products',
                                     verbose_name="Partiya")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products', verbose_name="Egasi", null=True,
-                             blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products', verbose_name="Egasi")
     trek_code = models.CharField(max_length=255, null=True, verbose_name="Trek kod")
     name = models.CharField(max_length=255, null=True, verbose_name="Nomi", blank=True)
     quantity = models.PositiveBigIntegerField(verbose_name="Soni", null=True, blank=True)
@@ -104,12 +103,10 @@ class Product(models.Model):
     # (boyi * eni * balandligi) / 6000
     standart_kg = models.DecimalField(blank=True, null=True, max_digits=15, decimal_places=2,
                                       verbose_name="Standart kg")
-    own_kg = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="O'zini kgsi", null=True, blank=True)
-    price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Tovar narxi", null=True, blank=True)
-    service_price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Xizmat narxi", null=True,
-                                        blank=True)
-    summary = models.DecimalField(max_digits=15, decimal_places=2, null=True, verbose_name="Umumiy",
-                                  blank=True)  # standart_kg * xizmat_narxi + xitoy_xarajati
+    own_kg = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Og'irligi")
+    price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Tovar narxi")
+    service_price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Xizmat narxi")
+    summary = models.DecimalField(max_digits=15, decimal_places=2, null=True, verbose_name="Umumiy", blank=True)
     is_arrived = models.BooleanField(default=False, verbose_name="Uzb ga kelganmi?", null=True, blank=True)
     is_taken = models.BooleanField(default=False, verbose_name="Klientni qolidami?", null=True, blank=True)
     is_china = models.BooleanField(default=False, verbose_name="Xitoy skladidami?", null=True, blank=True)

@@ -38,7 +38,8 @@ class UserAdmin(ImportExportActionModelAdmin):
 
     def oldi_passport(self, obj):
         if obj.passport1:
-            return mark_safe(f'<a href="{obj.passport1.url}"><img src="{obj.passport1.url}" width="70px" height="70px"></a>')
+            return mark_safe(
+                f'<a href="{obj.passport1.url}"><img src="{obj.passport1.url}" width="70px" height="70px"></a>')
         else:
             return 'No image'
 
@@ -46,7 +47,8 @@ class UserAdmin(ImportExportActionModelAdmin):
 
     def orqa_passport(self, obj):
         if obj.passport2:
-            return mark_safe(f'<a href="{obj.passport2.url}"><img src="{obj.passport2.url}" width="70px" height="70px"></a>')
+            return mark_safe(
+                f'<a href="{obj.passport2.url}"><img src="{obj.passport2.url}" width="70px" height="70px"></a>')
         else:
             return 'No image'
 
@@ -94,7 +96,7 @@ class ReferalAdmin(ImportExportActionModelAdmin):
 class ProductAdmin(ImportExportActionModelAdmin):
     list_display = (
         'user_id_code', 'trek_code', 'name', 'quantity', 'tall', 'width', 'height', 'standart_kg',
-        'own_kg', 'daofu',
+        'own_kg', 'daofu', 'daofu_calculation',
         'summary', 'user_full_name', 'phone_number', 'status', 'change_status', 'photo')
     list_display_links = ('user_id_code', 'trek_code', 'name')
     resource_class = ProductResource
@@ -179,6 +181,12 @@ class ProductAdmin(ImportExportActionModelAdmin):
             return 'No image'
 
     photo.short_description = 'Фото продукта'
+
+    @admin.display(description='Jami')
+    def daofu_calculation(self, obj: Product):
+        if obj.daofu:
+            return round(obj.own_kg * obj.service_price + obj.daofu / obj.consignment.yuan_dollar, 2)
+        return 'Hali daofu kiritilmagan'
 
 
 @admin.register(CreatedAt)
