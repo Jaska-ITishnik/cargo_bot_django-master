@@ -78,8 +78,8 @@ class CreatedAt(models.Model):
                              verbose_name="KG")
     from_who = models.CharField(max_length=255, verbose_name="Kimdan")
     to_who = models.CharField(max_length=255, verbose_name="Kimga")
-    yuan_dollar = models.DecimalField(max_digits=5, decimal_places=2)
-    dollar_sum = models.DecimalField(max_digits=5, decimal_places=2)
+    yuan_dollar = models.DecimalField(max_digits=15, decimal_places=2)
+    dollar_sum = models.DecimalField(max_digits=15, decimal_places=2)
 
     def __str__(self):
         return f"{self.date} -> {self.consignment}"
