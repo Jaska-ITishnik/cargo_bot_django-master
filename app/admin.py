@@ -38,7 +38,7 @@ class UserAdmin(ImportExportActionModelAdmin):
 
     def oldi_passport(self, obj):
         if obj.passport1:
-            return mark_safe(f'<a href="{obj.passport1.url}"><img src="{obj.passport1.url}" width="50%"></a>')
+            return mark_safe(f'<a href="{obj.passport1.url}"><img src="{obj.passport1.url}" width="70px" height="70px"></a>')
         else:
             return 'No image'
 
@@ -46,7 +46,7 @@ class UserAdmin(ImportExportActionModelAdmin):
 
     def orqa_passport(self, obj):
         if obj.passport2:
-            return mark_safe(f'<a href="{obj.passport2.url}"><img src="{obj.passport2.url}" width="50%"></a>')
+            return mark_safe(f'<a href="{obj.passport2.url}"><img src="{obj.passport2.url}" width="70px" height="70px"></a>')
         else:
             return 'No image'
 
@@ -54,7 +54,7 @@ class UserAdmin(ImportExportActionModelAdmin):
 
     def rasmi(self, obj):
         if obj.image:
-            return mark_safe(f'<a href="{obj.image.url}"><img src="{obj.image.url}" width="50%"></a>')
+            return mark_safe(f'<a href="{obj.image.url}"><img src="{obj.image.url}" width="70px" height="70px"></a>')
         else:
             return 'No image'
 
@@ -174,7 +174,7 @@ class ProductAdmin(ImportExportActionModelAdmin):
 
     def photo(self, obj):
         if obj.image:
-            return mark_safe(f'<a href="{obj.image.url}"><img src="{obj.image.url}" width="50%"></a>')
+            return mark_safe(f'<a href="{obj.image.url}"><img src="{obj.image.url}" width="70px" height="70px"></a>')
         else:
             return 'No image'
 
