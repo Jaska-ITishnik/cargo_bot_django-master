@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from import_export.formats.base_formats import XLSX, CSV
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv('../.env')
+load_dotenv('.env')
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
@@ -93,8 +93,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+#MEDIA_URL = 'media/'
+#MEDIA_ROOT = BASE_DIR / 'media'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/var/www/cargo_bot-master/root/cargo_admin/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 IMPORT_EXPORT_ESCAPE_FORMULAE_ON_EXPORT = True
