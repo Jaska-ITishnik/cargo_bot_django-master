@@ -156,7 +156,7 @@ class Referal(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        bot = os.environ.get("BOT_USERNAME")
+        bot = os.getenv("BOT_USERNAME")
         self.link = f"https://t.me/{bot}?start={self.name}"
         super(Referal, self).save(*args, **kwargs)
 
