@@ -96,8 +96,8 @@ class ReferalAdmin(ImportExportActionModelAdmin):
 class ProductAdmin(ImportExportActionModelAdmin):
     list_display = (
         'user_id_code', 'trek_code', 'name', 'quantity', 'tall', 'width', 'height', 'standart_kg',
-        'own_kg', 'daofu', 'daofu_calculation',
-        'summary', 'user_full_name', 'phone_number', 'status', 'change_status', 'photo')
+        'own_kg', 'daofu', 'service_price', 'daofu_calculation', 'user_full_name', 'phone_number', 'status',
+        'change_status', 'photo')
     list_display_links = ('user_id_code', 'trek_code', 'name')
     resource_class = ProductResource
     search_fields = (
@@ -207,13 +207,14 @@ class CreatedAtAdmin(ImportExportActionModelAdmin):
             return sum(r)
         return 0
 
+    @admin.display(description='Суммарно')
     def general_sum(self, obj: CreatedAt):
-        r = obj.products.all().values_list('summary', flat=True)
-        if len(r) >= 1:
-            return sum(r)
-        return 0
-
-    general_sum.short_description = 'Суммарно'
+        products = Product.objects.filter(consignment=obj)
+        all_amount = []
+        for product in products:
+            all_amount.append(
+                round(product.own_kg * product.service_price + product.daofu / product.consignment.yuan_dollar, 2))
+        return sum(all_amount)
 
     def general_expenses(self, obj):
         if obj.expenses and obj.transport_expenses and obj.tax and obj.add_expenses:
