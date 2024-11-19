@@ -1,10 +1,11 @@
 from django.contrib import admin
+from django.contrib.admin import ModelAdmin
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from import_export.admin import ImportExportActionModelAdmin
 
 from app.forms import ProductForm
-from app.models import User, Product, Comment, Referal, CreatedAt, Phones, ActivePhone
+from app.models import User, Product, Comment, Referal, CreatedAt, Phones, ActivePhone, Address
 from app.resources import UserResource, ReferalResource, ProductResource, CreatedAtResource
 
 
@@ -242,6 +243,11 @@ class CreatedAtAdmin(ImportExportActionModelAdmin):
         return "Not defined"
 
     kg1.short_description = 'за 1 кг'
+
+
+@admin.register(Address)
+class AddressModelAdmin(ModelAdmin):
+    list_display = 'period_avia', 'period_avto', 'phone_number', 'mail_address', 'address'
 
 
 admin.site.register(Phones)

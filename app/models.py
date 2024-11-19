@@ -1,7 +1,9 @@
 import os
 
 from django.db import models
+from django.db.models import CharField
 from dotenv import load_dotenv
+from odf.xforms import Model
 
 # Create your models here.
 
@@ -191,3 +193,14 @@ class ActivePhone(models.Model):
         verbose_name = "Aktiv telefon"
         verbose_name_plural = "Aktiv telefon"
         db_table = 'active_phones'
+
+class Address(models.Model):
+    period_avia = CharField(max_length=20, default='1-15')
+    period_avto = CharField(max_length=20, default='15-30')
+    phone_number = CharField(max_length=30, default='17800293735')
+    mail_address = CharField(max_length=30, default='100024')
+    address = CharField(max_length=255, default='北京市朝阳区定福景园7号楼3单元1002 17800293735')
+
+    class Meta:
+        verbose_name = 'Manzil'
+        verbose_name_plural = 'Manzillar'
