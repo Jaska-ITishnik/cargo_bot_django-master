@@ -22,10 +22,11 @@ class UserAdmin(ImportExportActionModelAdmin):
     exclude = "latitude", "longitude", "is_active", "tg_id", 'referal', 'lang'
 
     def summary(self, obj):
-        r = obj.products.all().values_list('summary', flat=True)
-        if len(r) >= 1:
-            return sum(r)
+        r = obj.products.all().values_list('is_taken', 'summary')
+        if len(r) >= 1 and not r[0][0]:
+            return r[0][1]
         return 0
+
     summary.short_description = 'Общая сумма'
 
     def qoshimcha_tel(self, obj):
@@ -236,7 +237,7 @@ class CreatedAtAdmin(ImportExportActionModelAdmin):
     general_profit.short_description = 'Общие доходы'
 
     def kg1(self, obj):
-        if obj.expenses and obj.transport_expenses and obj.tax and obj.add_expenses:
+        if obj.expenses is not None and obj.transport_expenses is not None and obj.tax is not None and obj.add_expenses is not None:
             res = obj.expenses + obj.transport_expenses + obj.tax + obj.add_expenses
             return res / obj.kg
         return "Not defined"
@@ -246,7 +247,7 @@ class CreatedAtAdmin(ImportExportActionModelAdmin):
 
 @admin.register(Address)
 class AddressModelAdmin(ModelAdmin):
-    list_display = 'period_avia', 'period_avto', 'phone_number', 'mail_address', 'address'
+    list_display = 'period_avia', 'period_avto', 'phone_number', 'mail_address', 'address', 'address_uzbek_uz', 'address_uzbek_ru'
 
 
 admin.site.register(Phones)

@@ -1,25 +1,39 @@
+from dal import autocomplete
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
-from app.models import Product, User
-from dal import autocomplete
 
-from utils import send_telegram_notification, arrived, arrived_china
+from app.models import Address
+from app.models import Product, User
+from utils import send_telegram_notification, arrived, arrived_china, taken_order
 
 
 def is_taken(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
+    if product.user:
+        if product.user.lang == 'uz':
+            send_telegram_notification(taken_order[product.user.lang].format(product.trek_code), product.user.tg_id)
+        else:
+            send_telegram_notification(taken_order[product.user.lang].format(product.trek_code), product.user.tg_id)
     product.is_taken = True
     product.save()
     return redirect(reverse('admin:app_product_changelist'))
 
 
 def is_arrived(request, product_id):
+    uzbek_address_uz = Address.objects.all().last().address_uzbek_uz
+    uzbek_address_ru = Address.objects.all().last().address_uzbek_ru
     product = get_object_or_404(Product, pk=product_id)
     if product.user:
-        send_telegram_notification(
-            arrived[product.user.lang].format(product.trek_code, product.name, product.own_kg, product.standart_kg,
-                                              product.summary),
-            product.user.tg_id)
+        if product.user.lang == 'uz':
+            send_telegram_notification(
+                arrived[product.user.lang].format(product.trek_code, product.name, product.own_kg, product.standart_kg,
+                                                  product.summary, uzbek_address_uz),
+                product.user.tg_id, product.image.path)
+        else:
+            send_telegram_notification(
+                arrived[product.user.lang].format(product.trek_code, product.name, product.own_kg, product.standart_kg,
+                                                  product.summary, uzbek_address_ru),
+                product.user.tg_id, product.image.path)
     product.is_arrived = True
     product.save()
     return redirect(reverse('admin:app_product_changelist'))
@@ -29,7 +43,8 @@ def is_china(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     if product.user:
         send_telegram_notification(
-            arrived_china[product.user.lang].format(product.trek_code, product.name, product.own_kg, product.standart_kg),
+            arrived_china[product.user.lang].format(product.trek_code, product.name, product.own_kg,
+                                                    product.standart_kg),
             product.user.tg_id)
     product.is_china = True
     product.save()

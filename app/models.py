@@ -56,9 +56,9 @@ class User(models.Model):
             if self.default_price:
                 product.summary = self.default_price
             elif self.is_standart:
-                product.summary = (product.stan_kg * product.service_price) + product.daofu
+                product.summary = (product.stan_kg * product.service_price) + product.daofu / product.consignment.yuan_dollar
             else:
-                self.summary = (product.own_kg * product.service_price) + product.daofu
+                self.summary = (product.own_kg * product.service_price) + product.daofu / product.consignment.yuan_dollar
             product.save()
         super(User, self).save(*args, **kwargs)
 
@@ -124,10 +124,10 @@ class Product(models.Model):
             if self.user.default_price:
                 self.summary = self.user.default_price
             elif self.user.is_standart and self.service_price and self.daofu:
-                self.summary = (stan_kg * self.service_price) + self.daofu
+                self.summary = (stan_kg * self.service_price) + self.daofu / self.consignment.yuan_dollar
             else:
                 if self.own_kg and self.service_price and self.daofu:
-                    self.summary = (self.own_kg * self.service_price) + self.daofu
+                    self.summary = (self.own_kg * self.service_price) + self.daofu / self.consignment.yuan_dollar
                 else:
                     self.summary = (self.own_kg * self.service_price)
         super(Product, self).save(*args, **kwargs)
@@ -202,6 +202,8 @@ class Address(models.Model):
     phone_number = CharField(max_length=30, default='17800293735')
     mail_address = CharField(max_length=30, default='100024')
     address = CharField(max_length=255, default='北京市朝阳区定福景园7号楼3单元1002 17800293735')
+    address_uzbek_uz = CharField(max_length=255, default='Toshkent shahar,Shayxontohur tumani,Kichik halqa yo’li, 147  5-qavat', verbose_name="O'zbekiston manzili 🇺🇿")
+    address_uzbek_ru = CharField(max_length=255, default='г. Ташкент, Шайхонтохурский район, Малая кольцевая дорога, 147, 5 этаж', verbose_name="O'zbekiston manzili 🇷🇺")
 
     class Meta:
         verbose_name = 'Manzil'
