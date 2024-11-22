@@ -26,7 +26,6 @@ class UserAdmin(ImportExportActionModelAdmin):
         if len(r) >= 1:
             return sum(r)
         return 0
-
     summary.short_description = 'Общая сумма'
 
     def qoshimcha_tel(self, obj):
@@ -187,7 +186,7 @@ class ProductAdmin(ImportExportActionModelAdmin):
     def daofu_calculation(self, obj: Product):
         if obj.daofu:
             return round(obj.own_kg * obj.service_price + obj.daofu / obj.consignment.yuan_dollar, 2)
-        return 'Hali daofu kiritilmagan'
+        return round(obj.own_kg * obj.service_price, 2)
 
 
 @admin.register(CreatedAt)

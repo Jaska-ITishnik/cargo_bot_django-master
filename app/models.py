@@ -108,12 +108,12 @@ class Product(models.Model):
     own_kg = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Og'irligi")
     price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Tovar narxi")
     service_price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Xizmat narxi")
-    summary = models.DecimalField(max_digits=15, decimal_places=2, null=True, verbose_name="Umumiy", blank=True)
+    summary = models.DecimalField(max_digits=15, decimal_places=2, null=True, verbose_name="Umumiy", blank=True, default=0.00)
     is_arrived = models.BooleanField(default=False, verbose_name="Uzb ga kelganmi?", null=True, blank=True)
     is_taken = models.BooleanField(default=False, verbose_name="Klientni qolidami?", null=True, blank=True)
     is_china = models.BooleanField(default=False, verbose_name="Xitoy skladidami?", null=True, blank=True)
     image = models.ImageField(upload_to='products', null=True, blank=True, verbose_name="Rasm")
-    daofu = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Daofu", null=True, blank=True)
+    daofu = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Daofu", null=True, blank=True, default=0.00)
 
     def save(self, *args, **kwargs):
         stan_kg = 0
@@ -128,6 +128,8 @@ class Product(models.Model):
             else:
                 if self.own_kg and self.service_price and self.daofu:
                     self.summary = (self.own_kg * self.service_price) + self.daofu
+                else:
+                    self.summary = (self.own_kg * self.service_price)
         super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
