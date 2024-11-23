@@ -25,15 +25,31 @@ def is_arrived(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     if product.user:
         if product.user.lang == 'uz':
-            send_telegram_notification(
-                arrived[product.user.lang].format(product.trek_code, product.name, product.own_kg, product.standart_kg,
-                                                  product.summary, uzbek_address_uz),
-                product.user.tg_id, product.image.path)
+            if product.image:
+                send_telegram_notification(
+                    arrived[product.user.lang].format(product.trek_code, product.name, product.own_kg,
+                                                      product.standart_kg,
+                                                      product.summary, uzbek_address_uz),
+                    product.user.tg_id, product.image.path)
+            else:
+                send_telegram_notification(
+                    arrived[product.user.lang].format(product.trek_code, product.name, product.own_kg,
+                                                      product.standart_kg,
+                                                      product.summary, uzbek_address_uz),
+                    product.user.tg_id)
         else:
-            send_telegram_notification(
-                arrived[product.user.lang].format(product.trek_code, product.name, product.own_kg, product.standart_kg,
-                                                  product.summary, uzbek_address_ru),
-                product.user.tg_id, product.image.path)
+            if product.image:
+                send_telegram_notification(
+                    arrived[product.user.lang].format(product.trek_code, product.name, product.own_kg,
+                                                      product.standart_kg,
+                                                      product.summary, uzbek_address_ru),
+                    product.user.tg_id, product.image.path)
+            else:
+                send_telegram_notification(
+                    arrived[product.user.lang].format(product.trek_code, product.name, product.own_kg,
+                                                      product.standart_kg,
+                                                      product.summary, uzbek_address_ru),
+                    product.user.tg_id)
     product.is_arrived = True
     product.save()
     return redirect(reverse('admin:app_product_changelist'))
