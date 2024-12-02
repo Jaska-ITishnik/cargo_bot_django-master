@@ -111,6 +111,12 @@ class ProductResource(resources.ModelResource):
         attribute='user',
         widget=ForeignKeyWidget(User, field="id_code")
     )
+
+    unregistered_user_phone = Field(
+        column_name="Ro'yxatdan o'tmagan userni telefoni",
+        attribute='unregistered_user_phone',
+    )
+
     trek_code = Field(
         column_name='Трек код',
         attribute='trek_code',

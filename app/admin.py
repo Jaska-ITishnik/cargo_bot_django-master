@@ -96,7 +96,8 @@ class ReferalAdmin(ImportExportActionModelAdmin):
 @admin.register(Product)
 class ProductAdmin(ImportExportActionModelAdmin):
     list_display = (
-        'user_id_code', 'trek_code', 'name', 'quantity', 'tall', 'width', 'height', 'standart_kg',
+        'user_id_code', 'unregistered_user_phone', 'trek_code', 'name', 'quantity', 'tall', 'width', 'height',
+        'standart_kg',
         'own_kg', 'daofu', 'service_price', 'daofu_calculation', 'user_full_name', 'phone_number', 'status',
         'change_status', 'photo')
     list_display_links = ('user_id_code', 'trek_code', 'name')
@@ -157,7 +158,7 @@ class ProductAdmin(ImportExportActionModelAdmin):
     def user_id_code(self, obj):
         if obj.user:
             return obj.user.id_code
-        return "No name"
+        return "ro'yxatdan o'tilmagan -> "
 
     user_id_code.short_description = 'ID код владельца'
 

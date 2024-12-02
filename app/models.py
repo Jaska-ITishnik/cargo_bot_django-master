@@ -3,7 +3,6 @@ import os
 from django.db import models
 from django.db.models import CharField
 from dotenv import load_dotenv
-from odf.xforms import Model
 
 # Create your models here.
 
@@ -56,9 +55,11 @@ class User(models.Model):
             if self.default_price:
                 product.summary = self.default_price
             elif self.is_standart:
-                product.summary = (product.stan_kg * product.service_price) + product.daofu / product.consignment.yuan_dollar
+                product.summary = (
+                                          product.stan_kg * product.service_price) + product.daofu / product.consignment.yuan_dollar
             else:
-                self.summary = (product.own_kg * product.service_price) + product.daofu / product.consignment.yuan_dollar
+                self.summary = (
+                                       product.own_kg * product.service_price) + product.daofu / product.consignment.yuan_dollar
             product.save()
         super(User, self).save(*args, **kwargs)
 
@@ -95,7 +96,10 @@ class CreatedAt(models.Model):
 class Product(models.Model):
     consignment = models.ForeignKey(CreatedAt, on_delete=models.CASCADE, related_name='products',
                                     verbose_name="Partiya")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products', verbose_name="Egasi")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products', verbose_name="Egasi", null=True,
+                             blank=True)
+    unregistered_user_phone = CharField(max_length=20, null=True, blank=True,
+                                        verbose_name="register bo'lmagan")
     trek_code = models.CharField(max_length=255, null=True, verbose_name="Trek kod")
     name = models.CharField(max_length=255, null=True, verbose_name="Nomi", blank=True)
     quantity = models.PositiveBigIntegerField(verbose_name="Soni", null=True, blank=True)
@@ -108,12 +112,14 @@ class Product(models.Model):
     own_kg = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Og'irligi")
     price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Tovar narxi")
     service_price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Xizmat narxi")
-    summary = models.DecimalField(max_digits=15, decimal_places=2, null=True, verbose_name="Umumiy", blank=True, default=0.00)
+    summary = models.DecimalField(max_digits=15, decimal_places=2, null=True, verbose_name="Umumiy", blank=True,
+                                  default=0.00)
     is_arrived = models.BooleanField(default=False, verbose_name="Uzb ga kelganmi?", null=True, blank=True)
     is_taken = models.BooleanField(default=False, verbose_name="Klientni qolidami?", null=True, blank=True)
     is_china = models.BooleanField(default=False, verbose_name="Xitoy skladidami?", null=True, blank=True)
     image = models.ImageField(upload_to='products', null=True, blank=True, verbose_name="Rasm")
-    daofu = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Daofu", null=True, blank=True, default=0.00)
+    daofu = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Daofu", null=True, blank=True,
+                                default=0.00)
 
     def save(self, *args, **kwargs):
         stan_kg = 0
@@ -125,11 +131,10 @@ class Product(models.Model):
                 self.summary = self.user.default_price
             elif self.user.is_standart and self.service_price and self.daofu:
                 self.summary = (stan_kg * self.service_price) + self.daofu / self.consignment.yuan_dollar
-            else:
-                if self.own_kg and self.service_price and self.daofu:
-                    self.summary = (self.own_kg * self.service_price) + self.daofu / self.consignment.yuan_dollar
-                else:
-                    self.summary = (self.own_kg * self.service_price)
+        if self.own_kg and self.service_price and self.daofu:
+            self.summary = (self.own_kg * self.service_price) + self.daofu / self.consignment.yuan_dollar
+        else:
+            self.summary = (self.own_kg * self.service_price)
         super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -196,14 +201,19 @@ class ActivePhone(models.Model):
         verbose_name_plural = "Aktiv telefon"
         db_table = 'active_phones'
 
+
 class Address(models.Model):
     period_avia = CharField(max_length=20, default='1-15')
     period_avto = CharField(max_length=20, default='15-30')
     phone_number = CharField(max_length=30, default='17800293735')
     mail_address = CharField(max_length=30, default='100024')
     address = CharField(max_length=255, default='北京市朝阳区定福景园7号楼3单元1002 17800293735')
-    address_uzbek_uz = CharField(max_length=255, default='Toshkent shahar,Shayxontohur tumani,Kichik halqa yo’li, 147  5-qavat', verbose_name="O'zbekiston manzili 🇺🇿")
-    address_uzbek_ru = CharField(max_length=255, default='г. Ташкент, Шайхонтохурский район, Малая кольцевая дорога, 147, 5 этаж', verbose_name="O'zbekiston manzili 🇷🇺")
+    address_uzbek_uz = CharField(max_length=255,
+                                 default='Toshkent shahar,Shayxontohur tumani,Kichik halqa yo’li, 147  5-qavat',
+                                 verbose_name="O'zbekiston manzili 🇺🇿")
+    address_uzbek_ru = CharField(max_length=255,
+                                 default='г. Ташкент, Шайхонтохурский район, Малая кольцевая дорога, 147, 5 этаж',
+                                 verbose_name="O'zbekiston manzili 🇷🇺")
 
     class Meta:
         verbose_name = 'Manzil'
