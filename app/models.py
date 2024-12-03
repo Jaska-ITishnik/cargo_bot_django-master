@@ -1,4 +1,5 @@
 import os
+from decimal import Decimal
 
 from django.db import models
 from django.db.models import CharField
@@ -130,17 +131,19 @@ class Product(models.Model):
             if self.user.default_price:
                 self.summary = self.user.default_price
             elif self.user.is_standart and self.service_price and self.daofu:
-                self.summary = (stan_kg * self.service_price) + self.daofu / self.consignment.yuan_dollar
+                self.summary = Decimal(stan_kg * self.service_price) + Decimal(self.daofu) / Decimal(
+                    self.consignment.yuan_dollar)
         if self.own_kg and self.service_price and self.daofu:
-            self.summary = (self.own_kg * self.service_price) + self.daofu / self.consignment.yuan_dollar
+            self.summary = Decimal(self.own_kg * self.service_price) + Decimal(self.daofu) / Decimal(
+                self.consignment.yuan_dollar)
         else:
-            self.summary = (self.own_kg * self.service_price)
+            self.summary = Decimal(self.own_kg * self.service_price)
         super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
         if self.user and self.name:
             return self.user.full_name + " -> " + self.name
-        return self.trek_code
+        return str(self.trek_code)  #
 
     class Meta:
         verbose_name = "Tovar"
