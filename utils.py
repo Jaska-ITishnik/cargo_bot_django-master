@@ -19,14 +19,10 @@ taken_order = {
     'ru': "Вы получили товар с кодом -> {0} 🤝",
 }
 
-# def send_telegram_notification(text, chat_id):
-#     # token = '7139094213:AAF1g3Gmfk0Zt1ERV-XolSATn5fqEoPYI_E'
-#     token = '7510074118:AAGiuncdv44_TFuvmeJ-vekE4yRwuDx9LcI'
-#     url = f'https://api.telegram.org/bot{token}/sendMessage?chat_id='
-#     requests.get(url + str(chat_id) + '&text=' + text)
 
 def send_telegram_notification(text, chat_id, photo_path=None):
     token = '7139094213:AAF1g3Gmfk0Zt1ERV-XolSATn5fqEoPYI_E'
+    # token = '7510074118:AAGiuncdv44_TFuvmeJ-vekE4yRwuDx9LcI'
     base_url = f'https://api.telegram.org/bot{token}/'
 
     if photo_path:
