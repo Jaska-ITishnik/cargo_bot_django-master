@@ -7,38 +7,38 @@ from app.models import User, Referal, CreatedAt, Product
 
 class UserResource(resources.ModelResource):
     full_name = Field(
-        column_name='Полное имя',
+        column_name="To'liq ismi",
         attribute='full_name',
     )
     phone_number = Field(
-        column_name='Номер телефона',
+        column_name='Telefon nomeri',
         attribute='phone_number',
     )
     phone_number2 = Field(
-        column_name='Номер телефона (доп)',
+        column_name="Telefon nomeri (qo'sh)",
         attribute='phone_number2',
     )
     id_code = Field(
-        column_name='ID код',
+        column_name='ID kod',
         attribute='id_code',
     )
     is_standart = Field(
-        column_name='По стандарту',
+        column_name='Standartmi',
         attribute='is_standart',
         widget=BooleanWidget()
     )
     is_kg = Field(
-        column_name='По кг',
+        column_name='Kg mi',
         attribute='is_kg',
         widget=BooleanWidget()
     )
     default_price = Field(
-        column_name='Цена по умолчанию',
+        column_name='Standart narx',
         attribute='default_price',
         widget=FloatWidget()
     )
     referal = Field(
-        column_name='Реферал',
+        column_name='Refferal',
         attribute='referal',
         widget=ForeignKeyWidget(Referal, field='name')
     )
@@ -51,45 +51,45 @@ class UserResource(resources.ModelResource):
 
 class CreatedAtResource(resources.ModelResource):
     date = Field(
-        column_name='Дата',
+        column_name='Sana',
         attribute='date',
         widget=DateWidget(format="%d.%m.%Y")
     )
     consignment = Field(
-        column_name='Партия',
+        column_name='Partiya',
         attribute='consignment',
     )
     expenses = Field(
-        column_name='Расходы',
+        column_name='Xarajatlar',
         attribute='expenses',
         widget=FloatWidget()
     )
     transport_expenses = Field(
-        column_name='Транспортные расходы',
+        column_name='Transport xarajatlari',
         attribute='transport_expenses',
         widget=FloatWidget()
     )
     tax = Field(
-        column_name='Налоги',
+        column_name='Soqlilar',
         attribute='tax',
         widget=FloatWidget()
     )
     add_expenses = Field(
-        column_name='Доп. расходы',
+        column_name="Qo'shimcha. xarajatlar",
         attribute='add_expenses',
         widget=FloatWidget()
     )
     kg = Field(
-        column_name='КГ',
+        column_name='Kg',
         attribute='kg',
         widget=FloatWidget()
     )
     from_who = Field(
-        column_name='От кого',
+        column_name='Kim tomonidan',
         attribute='from_who',
     )
     to_who = Field(
-        column_name='К Кому',
+        column_name='Kimga',
         attribute='to_who',
     )
 
@@ -102,12 +102,12 @@ class CreatedAtResource(resources.ModelResource):
 
 class ProductResource(resources.ModelResource):
     consignment = Field(
-        column_name='Партия',
+        column_name='Partiya',
         attribute='consignment',
         widget=ForeignKeyWidget(model=CreatedAt, field='pk')
     )
     user = Field(
-        column_name='Владелец',
+        column_name='Egasi',
         attribute='user',
         widget=ForeignKeyWidget(User, field="id_code")
     )
@@ -118,70 +118,70 @@ class ProductResource(resources.ModelResource):
     )
 
     trek_code = Field(
-        column_name='Трек код',
+        column_name='Trek kodi',
         attribute='trek_code',
     )
     name = Field(
-        column_name='Название',
+        column_name='Nomi',
         attribute='name',
     )
     quantity = Field(
-        column_name='Количество',
+        column_name='Soni',
         attribute='quantity',
         widget=IntegerWidget()
     )
     tall = Field(
-        column_name='Длина',
+        column_name='Uzunligi',
         attribute='tall',
         widget=FloatWidget()
     )
     width = Field(
-        column_name='Ширина',
+        column_name='Kengligi',
         attribute='width',
         widget=FloatWidget()
     )
     height = Field(
-        column_name='Высота',
+        column_name='Balandligi',
         attribute='height',
         widget=FloatWidget()
     )
     standart_kg = Field(
-        column_name='Стандарт вес',
+        column_name="Standart og'irligi",
         attribute='standart_kg',
         widget=FloatWidget()
     )
     own_kg = Field(
-        column_name='Собственный вес',
+        column_name='Sof vazni',
         attribute='own_kg',
         widget=FloatWidget()
     )
     price = Field(
-        column_name='Цена продукта',
+        column_name='Maxsulot narxi',
         attribute='price',
         widget=FloatWidget()
     )
     service_price = Field(
-        column_name='Цена услуги',
+        column_name='Xizmat narxi',
         attribute='service_price',
         widget=FloatWidget()
     )
     summary = Field(
-        column_name='Суммарно',
+        column_name='Jami',
         attribute='summary',
         widget=FloatWidget()
     )
     is_china = Field(
-        column_name='Пришло в Узб?',
+        column_name='Uzb ga keldimi?',
         attribute='is_arrived',
         widget=BooleanWidget()
     )
     is_arrived = Field(
-        column_name='Не в Китае?',
+        column_name='Xitoyda emasmi?',
         attribute='is_arrived',
         widget=BooleanWidget()
     )
     is_taken = Field(
-        column_name='Забрал клиент?',
+        column_name='Klient olib kettimi?',
         attribute='is_taken',
         widget=BooleanWidget()
     )
@@ -199,7 +199,7 @@ class ProductResource(resources.ModelResource):
 
 
 class ReferalResource(resources.ModelResource):
-    name = Field(column_name='Название', attribute='name')
+    name = Field(column_name='Nomi', attribute='name')
 
     class Meta:
         model = Referal
