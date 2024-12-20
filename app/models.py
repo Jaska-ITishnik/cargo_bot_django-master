@@ -108,7 +108,7 @@ class Product(models.Model):
     width = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Kenglik", null=True, blank=True)
     height = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Balanglik", null=True, blank=True)
     # (boyi * eni * balandligi) / 6000
-    standart_kg = models.DecimalField(blank=True, null=True, max_digits=15, decimal_places=2,
+    standart_kg = models.DecimalField(max_digits=15, decimal_places=2,
                                       verbose_name="Standart kg")
     own_kg = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Og'irligi")
     price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Tovar narxi")

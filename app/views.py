@@ -52,7 +52,9 @@ def is_arrived(request, product_id):
                     product.user.tg_id)
     product.is_arrived = True
     product.save()
-    return redirect(reverse('admin:app_product_changelist'))
+    if product.user:
+        return redirect(reverse('admin:app_product_changelist'))
+    return redirect(reverse('admin:app_notregisteredproductproxy_changelist'))
 
 
 def is_china(request, product_id):
@@ -64,28 +66,36 @@ def is_china(request, product_id):
             product.user.tg_id)
     product.is_china = True
     product.save()
-    return redirect(reverse('admin:app_product_changelist'))
+    if product.user:
+        return redirect(reverse('admin:app_product_changelist'))
+    return redirect(reverse('admin:app_notregisteredproductproxy_changelist'))
 
 
 def not_is_taken(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     product.is_taken = False
     product.save()
-    return redirect(reverse('admin:app_product_changelist'))
+    if product.user:
+        return redirect(reverse('admin:app_product_changelist'))
+    return redirect(reverse('admin:app_notregisteredproductproxy_changelist'))
 
 
 def not_is_arrived(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     product.is_arrived = False
     product.save()
-    return redirect(reverse('admin:app_product_changelist'))
+    if product.user:
+        return redirect(reverse('admin:app_product_changelist'))
+    return redirect(reverse('admin:app_notregisteredproductproxy_changelist'))
 
 
 def not_is_china(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     product.is_china = False
     product.save()
-    return redirect(reverse('admin:app_product_changelist'))
+    if product.user:
+        return redirect(reverse('admin:app_product_changelist'))
+    return redirect(reverse('admin:app_notregisteredproductproxy_changelist'))
 
 
 class OwnerAutocomplete(autocomplete.Select2QuerySetView):
