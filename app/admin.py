@@ -99,7 +99,7 @@ class ProductAdmin(ImportExportActionModelAdmin):
     list_display = (
         'user_id_code', 'unregistered_user_phone', 'trek_code', 'name', 'quantity', 'tall', 'width', 'height',
         'standart_kg',
-        'own_kg', 'daofu', 'service_price', 'daofu_calculation', 'user_full_name', 'phone_number', 'status',
+        'own_kg', 'dafousi', 'Xizmat_narxi', 'daofu_calculation', 'user_full_name', 'phone_number', 'status',
         'change_status', 'photo')
     list_display_links = ('user_id_code', 'trek_code', 'name')
     resource_class = ProductResource
@@ -191,8 +191,8 @@ class ProductAdmin(ImportExportActionModelAdmin):
     @admin.display(description='Jami')
     def daofu_calculation(self, obj: Product):
         if obj.daofu:
-            return round(obj.own_kg * obj.service_price + obj.daofu / obj.consignment.yuan_dollar, 2)
-        return round(obj.own_kg * obj.service_price, 2)
+            return f"💲{round(obj.own_kg * obj.service_price + obj.daofu / obj.consignment.yuan_dollar, 2)}"
+        return f"💲{round(obj.own_kg * obj.service_price, 2)}"
 
 
 @admin.register(NotRegisteredProductProxy)

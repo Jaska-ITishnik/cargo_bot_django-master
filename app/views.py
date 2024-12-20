@@ -29,26 +29,26 @@ def is_arrived(request, product_id):
                 send_telegram_notification(
                     arrived[product.user.lang].format(product.trek_code, product.name, product.own_kg,
                                                       product.standart_kg,
-                                                      product.summary, uzbek_address_uz),
+                                                      product.summary, product.dafousi, uzbek_address_uz),
                     product.user.tg_id, product.image.path)
             else:
                 send_telegram_notification(
                     arrived[product.user.lang].format(product.trek_code, product.name, product.own_kg,
                                                       product.standart_kg,
-                                                      product.summary, uzbek_address_uz),
+                                                      product.summary, product.dafousi, uzbek_address_uz),
                     product.user.tg_id)
         else:
             if product.image:
                 send_telegram_notification(
                     arrived[product.user.lang].format(product.trek_code, product.name, product.own_kg,
                                                       product.standart_kg,
-                                                      product.summary, uzbek_address_ru),
+                                                      product.summary, product.dafousi, uzbek_address_ru),
                     product.user.tg_id, product.image.path)
             else:
                 send_telegram_notification(
                     arrived[product.user.lang].format(product.trek_code, product.name, product.own_kg,
                                                       product.standart_kg,
-                                                      product.summary, uzbek_address_ru),
+                                                      product.summary, product.dafousi, uzbek_address_ru),
                     product.user.tg_id)
     product.is_arrived = True
     product.save()

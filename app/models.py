@@ -145,6 +145,14 @@ class Product(models.Model):
             return self.user.full_name + " -> " + self.name
         return str(self.trek_code)  #
 
+    @property
+    def Xizmat_narxi(self):
+        return f"💲{self.service_price}"
+
+    @property
+    def dafousi(self):
+        return f"¥{self.daofu}"
+
     class Meta:
         verbose_name = "Tovar"
         verbose_name_plural = "Tovarlar"
