@@ -111,7 +111,7 @@ class ProductAdmin(ImportExportActionModelAdmin):
         'user', 'name', 'tall', 'width', 'height', 'standart_kg',
         'own_kg', 'daofu',
         'summary', 'is_arrived', 'is_taken', 'consignment')
-    exclude = ('standart_kg', 'summary')
+    exclude = 'summary',
     form = ProductForm
 
     def get_queryset(self, request):
