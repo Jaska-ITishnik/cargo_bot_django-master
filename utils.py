@@ -1,10 +1,10 @@
 import requests
 
 arrived = {
-    'uz': "Buyurtmangiz O'zbekistonga yetib keldi!\nTovar trek kodi: {0}\nTovar nomi: {1}\nTovar kg: {2}\nKub kg: {3}\nDaofusi: {5}\nTo'lov: 💲{4}\n\n"
+    'uz': "Buyurtmangiz O'zbekistonga yetib keldi!\nTovar trek kodi: {0}\nTovar nomi: {1}\nTovar kg: {2}\nKub kg: {3}\nDaofusi: {5}\nTo'lov: ${4}\n\n"
           "Siz tovarlaringizni quyidagi manzildan olishingiz mumkin:\n"
           "{6}",
-    'ru': "Ваш заказ прибыл в Узбекистан!\nТрек-код товара: {0}\nНазвание товара: {1}\nТовар кг: {2}\nКуб кг: {3}\nDaofu: {5}\nОплата: {4}\n\n"
+    'ru': "Ваш заказ прибыл в Узбекистан!\nТрек-код товара: {0}\nНазвание товара: {1}\nТовар кг: {2}\nКуб кг: {3}\nDaofu: {5}\nОплата: ${4}\n\n"
           "Вы можете забрать свой товар по следующему адресу:\n"
           "{6}"
 }
