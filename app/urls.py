@@ -13,6 +13,5 @@ urlpatterns = [
     path('not_is_taken/<int:product_id>', views.not_is_taken, name='not_is_taken'),
     path('not_is_arrived/<int:product_id>', views.not_is_arrived, name='not_is_arrived'),
     path('not_is_china/<int:product_id>', views.not_is_china, name='not_is_china'),
-
     path('owner-autocomplete/', OwnerAutocomplete.as_view(), name='owner-autocomplete'),
 ]

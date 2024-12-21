@@ -1,9 +1,11 @@
 from dal import autocomplete
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
+from django.views.generic import ListView
 
-from app.models import Address
+from app.models import Address, ActivePhone, Comment, CreatedAt, Referal, Phones
 from app.models import Product, User
+from app.product_proxy import NotRegisteredProductProxy
 from utils import send_telegram_notification, arrived, arrived_china, taken_order
 
 
@@ -109,3 +111,4 @@ class OwnerAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(id_code__icontains=self.q)
 
         return qs
+

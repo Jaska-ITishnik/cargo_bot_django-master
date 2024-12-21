@@ -1,0 +1,154 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}
+{% block extrastyle %}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+            color: var(--body-fg);
+            background: url("https://imagizer.imageshack.com/img922/6941/cjOzcv.jpg") no-repeat center center fixed;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: lighten;
+            filter: brightness(1.4);
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-weight: bold;
+            font-family: "L ucida Handwriting", cursive;
+        }
+
+        div.breadcrumbs {
+            background: #002c2c;
+            padding: 10px 40px;
+            border: none;
+            color: var(--breadcrumbs-fg);
+            text-align: left;
+        }
+
+        #header {
+            width: auto;
+            height: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            background: #003e3e;
+            color: var(--header-color);
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .module h2, .module caption, .inline-group h2 {
+            margin: 0;
+            padding: 8px;
+            font-weight: 400;
+            font-size: 13px;
+            text-align: left;
+            background: #003e3e;
+            color: var(--header-link-color);
+        }
+
+        a:link, a:visited {
+            color: #f5dd5d;
+            font-family: "Brush Script MT", cursive;
+            text-decoration: none;
+            transition: color 0.15s, background 0.15s;
+        }
+
+        #content-related .module {
+            background: none;
+        }
+
+        .module {
+            border: none;
+            margin-bottom: 30px;
+            background: var(--body-bg);
+        }
+
+
+        .dashboard #content {
+            width: 700px;
+        }
+
+        td, th {
+            font-size: 13px;
+            line-height: 16px;
+            border-bottom: 1px solid #4ac1f7;
+            background: #003e3e;
+            vertical-align: top;
+            padding: 8px;
+        }
+
+        #content-related {
+            float: right;
+            width: 270px;
+            position: relative;
+            margin-right: -300px;
+            background: #003e3e;
+        }
+
+        #content {
+            padding: 20px 40px;
+            font-weight: bold;
+        }
+
+        form {
+            margin: 2px auto; /* Center form with margin */
+            padding: 20px; /* Add space inside the form */
+            color: #ffffff; /* White text for contrast */
+            font-family: Arial, sans-serif; /* Clean font style */
+        }
+
+        .form-row {
+            background: #003e3e;
+            border: 1.5px solid black;
+            color: #f5dd5d;
+            overflow: hidden;
+            padding: 10px;
+            font-size: 20px;
+            border-bottom: 1px solid #22c0d0;
+        }
+
+
+        .button, input[type=submit], input[type=button], .submit-row input, a.button {
+            background: #003e3e;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            color: #f5dd5d;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .aligned label {
+            display: block;
+            padding: 4px 10px 0 0;
+            float: left;
+            width: 160px;
+            word-wrap: break-word;
+            line-height: 1;
+            color: #f5dd5d;
+            font-weight: bolder;
+        }
+
+        .errornote {
+            color: red;
+        }
+
+        ul.errorlist {
+            margin: 0 0 4px;
+            padding: 0;
+            color: red;
+            background: var(--body-bg);
+        }
+
+    </style>
+{% endblock %}

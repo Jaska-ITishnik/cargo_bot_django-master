@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
+from django.contrib.auth.models import Group
 from django.urls import reverse
-from django.utils.safestring import mark_safe
 from import_export.admin import ImportExportActionModelAdmin
 
 from app.forms import ProductForm
@@ -10,7 +10,25 @@ from app.product_proxy import NotRegisteredProductProxy
 from app.resources import UserResource, ReferalResource, ProductResource, CreatedAtResource
 
 
-# Register your models here.
+def get_app_list(self, request):
+    app_dict = self._build_app_dict(request)
+
+    app_list = sorted(app_dict.values(), key=lambda x: x['name'].lower())
+    for app in app_list:
+        for model in app['models']:
+            model_class = model['model']
+            if model['object_name'] == 'Product':
+                model['count'] = Product.objects.filter(user__isnull=False).count()
+            else:
+                model['count'] = model_class.objects.count()
+    return app_list
+
+
+from django.utils.safestring import mark_safe
+
+admin.AdminSite.get_app_list = get_app_list
+
+
 @admin.register(User)
 class UserAdmin(ImportExportActionModelAdmin):
     list_display = [
@@ -21,6 +39,11 @@ class UserAdmin(ImportExportActionModelAdmin):
     search_fields = 'id_code', 'full_name', 'phone_number', 'phone_number2'
     list_filter = 'id_code', 'full_name', 'phone_number', 'phone_number2', 'referal'
     exclude = "latitude", "longitude", "is_active", "tg_id", 'referal', 'lang'
+
+    class Media:
+        css = {
+            'all': ('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',)
+        }
 
     def summary(self, obj):
         r = obj.products.all().values_list('is_taken', 'summary')
@@ -320,3 +343,4 @@ class AddressModelAdmin(ModelAdmin):
 
 admin.site.register(Phones)
 admin.site.register(ActivePhone)
+admin.site.unregister(Group)

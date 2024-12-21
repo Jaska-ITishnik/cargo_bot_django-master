@@ -1,0 +1,69 @@
+{% extends 'admin/login.html' %}
+{% block extrastyle %}
+    {{ block.super }}
+
+
+    <style>
+
+        .login {
+            background: url("https://imagizer.imageshack.com/v2/498x200q50/r/922/MyyNuy.jpg ") no-repeat center center fixed;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: lighten;
+            filter: brightness(1.6);
+            border-radius: 20px; /* Rounded corners for oval effect */
+        }
+
+        .main {
+            font-size: 25px;
+            background-color: black; /* Optional background */
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+        }
+
+        .main:hover {
+            background-color: rgba(4, 162, 162, 0.79); /* Change background color on hover */
+            color: black; /* Change text color on hover */
+            font-size: 30px; /* Change font size on hover */
+        }
+
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #274c5f;
+                --primary-fg: #eee;
+                --body-fg: #eeeeee;
+                --body-bg: #000000;
+                --body-quiet-color: #e0e0e0;
+                --body-loud-color: #ffffff;
+                --breadcrumbs-link-fg: #e0e0e0;
+                --breadcrumbs-bg: var(--primary);
+                --link-fg: #81d4fa;
+                --link-hover-color: #4ac1f7;
+                --link-selected-fg: #6f94c6;
+                --hairline-color: #272727;
+                --border-color: #353535;
+                --error-fg: #e35f5f;
+                --message-success-bg: #006b1b;
+                --message-warning-bg: #583305;
+                --message-error-bg: #570808;
+                --darkened-bg: #212121;
+                --selected-bg: #1b1b1b;
+                --selected-row: #00363a;
+                --close-button-bg: #333333;
+                --close-button-hover-bg: #666666;
+            }
+        }
+
+        .button, input[type=submit], input[type=button], .submit-row input, a.button {
+            background: #00080c;
+            padding: 10px 15px;
+            border: none;
+            font-size: 20px;
+            border-radius: 4px;
+            color: white;
+            font-family: "L ucida Handwriting", cursive;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+    </style>
+{% endblock %}
