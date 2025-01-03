@@ -14,7 +14,7 @@ admin.site.site_header = mark_safe(
              width='60px' 
              height='60px'>
         <div style='font-family: "L ucida Handwriting", cursive; color: white;'>
-            ❄️ Faad Cargo Administration ❄️
+            ❄️ Fad Cargo Administration ❄️
         </div>
     </div>
     """
