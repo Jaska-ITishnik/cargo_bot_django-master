@@ -2,7 +2,7 @@ name: Cargo Admin Panel CI/CD Deployment
 
 on:
   push:
-
+    branches: [ master ]
 jobs:
   deploy:
     name: Deploy
