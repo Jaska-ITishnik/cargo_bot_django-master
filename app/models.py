@@ -3,7 +3,6 @@ from decimal import Decimal
 
 from django.db import models
 from django.db.models import CharField
-from django.utils.safestring import mark_safe
 from dotenv import load_dotenv
 
 # Create your models here.

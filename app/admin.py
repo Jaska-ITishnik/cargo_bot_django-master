@@ -123,7 +123,7 @@ class ProductAdmin(ImportExportActionModelAdmin):
         'user_id_code', 'unregistered_user_phone', 'trek_code', 'name', 'quantity', 'tall', 'width', 'height',
         'standart_kg',
         'own_kg', 'dafousi', 'Xizmat_narxi', 'daofu_calculation', 'user_full_name', 'phone_number', 'status',
-        'change_status', 'photo')
+        'change_status_buttons', 'photo')
     list_display_links = ('user_id_code', 'trek_code', 'name')
     resource_class = ProductResource
     search_fields = (
@@ -136,6 +136,9 @@ class ProductAdmin(ImportExportActionModelAdmin):
         'summary', 'is_arrived', 'is_taken', 'consignment')
     exclude = 'summary',
     form = ProductForm
+
+    class Media:
+        js = 'app/js/without_refresh.js',
 
     def get_queryset(self, request):
         return super().get_queryset(request).filter(user__isnull=False)
@@ -162,25 +165,26 @@ class ProductAdmin(ImportExportActionModelAdmin):
 """
         return mark_safe(res)
 
-    def change_status(self, obj):
-        res = ""
-        if obj.is_arrived:
-            res += f'<div style="width:200px,text-align:center,"><a href="{reverse("app:not_is_arrived", args=[obj.id])}" style="display:block;width:100px;background:#9f0000" class="button">Kelmagan</a></div>'
-        else:
-            res += f'<div style="width:200px,text-align:center,"><a href="{reverse("app:is_arrived", args=[obj.id])}" style="display:block;width:100px;" class="button">Kelgan</a></div>'
+    def change_status_buttons(self, obj):
+        return mark_safe(f"""
+            <div id="status-{obj.id}">
+                <a href="#" 
+                    class="status-change-button"
+                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px 10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_arrived else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
+                    data-url="{reverse('app:toggle_is_arrived', args=[obj.id])}">{'Yetib kelgan' if obj.is_arrived else 'Yetib kelmagan'}
+                </a>
+                <a href="#"  
+                    class="status-change-button"
+                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px  10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_taken else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
+                    data-url="{reverse('app:toggle_is_taken', args=[obj.id])}">{'Olib ketgan' if obj.is_taken else 'Olib ketmagan'}</a>
+                <a href="#"  
+                    class="status-change-button"
+                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px  10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_china else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
+                    data-url="{reverse('app:toggle_is_china', args=[obj.id])}">{'Xitoyda' if obj.is_china else 'Xitoyda emas'}</a>
+            </div>
+        """)
 
-        if obj.is_taken:
-            res += f'<div style="margin-top:30px,width:200px"><a href="{reverse("app:not_is_taken", args=[obj.id])}" style="display:block;width:100px;background:#9f0000;margin-top:10px;" class="button">Olib ketmagan</a></div>'
-        else:
-            res += f'<div style="margin-top:30px,width:200px"><a href="{reverse("app:is_taken", args=[obj.id])}" style="display:block;width:100px;margin-top:10px;" class="button">Olib ketgan</a></div>'
-
-        if obj.is_china:
-            res += f'<div style="margin-top:30px,width:200px"><a href="{reverse("app:not_is_china", args=[obj.id])}" style="display:block;width:100px;background:#9f0000;margin-top:10px;" class="button">Xitoyda emas</a></div>'
-        else:
-            res += f'<div style="margin-top:30px,width:200px"><a href="{reverse("app:is_china", args=[obj.id])}" style="display:block;width:100px;margin-top:10px;" class="button">Xitoyda</a></div>'
-        return mark_safe(res)
-
-    change_status.short_description = "Statusni o'zgartirish"
+    change_status_buttons.short_description = "Holatini o'zgartirish"
 
     def user_id_code(self, obj):
         if obj.user:
@@ -223,9 +227,12 @@ class NotRegisteredProductProxyModelAdmin(ImportExportActionModelAdmin):
     list_display = (
         'unregistered_user_phone', 'trek_code', 'name', 'quantity', 'tall', 'width', 'height',
         'standart_kg',
-        'own_kg', 'daofu', 'service_price', 'daofu_calculation', 'user_full_name', 'status', 'change_status'
+        'own_kg', 'daofu', 'service_price', 'daofu_calculation', 'user_full_name', 'status', 'change_status_buttons'
     )
     resource_class = ProductResource
+
+    class Media:
+        js = 'app/js/without_refresh.js',
 
     @admin.display(description='Jami')
     def daofu_calculation(self, obj: Product):
@@ -260,25 +267,26 @@ class NotRegisteredProductProxyModelAdmin(ImportExportActionModelAdmin):
     """
         return mark_safe(res)
 
-    def change_status(self, obj):
-        res = ""
-        if obj.is_arrived:
-            res += f'<div style="width:200px,text-align:center,"><a href="{reverse("app:not_is_arrived", args=[obj.id])}" style="display:block;width:100px;background:#9f0000" class="button">Kelmagan</a></div>'
-        else:
-            res += f'<div style="width:200px,text-align:center,"><a href="{reverse("app:is_arrived", args=[obj.id])}" style="display:block;width:100px;" class="button">Kelgan</a></div>'
+    def change_status_buttons(self, obj):
+        return mark_safe(f"""
+            <div id="status-{obj.id}">
+                <a href="#" 
+                    class="status-change-button"
+                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px 10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_arrived else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
+                    data-url="{reverse('app:toggle_is_arrived', args=[obj.id])}">{'Yetib kelgan' if obj.is_arrived else 'Yetib kelmagan'}
+                </a>
+                <a href="#"  
+                    class="status-change-button"
+                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px  10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_taken else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
+                    data-url="{reverse('app:toggle_is_taken', args=[obj.id])}">{'Olib ketgan' if obj.is_taken else 'Olib ketmagan'}</a>
+                <a href="#"  
+                    class="status-change-button"
+                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px  10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_china else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
+                    data-url="{reverse('app:toggle_is_china', args=[obj.id])}">{'Xitoyda' if obj.is_china else 'Xitoyda emas'}</a>
+            </div>
+        """)
 
-        if obj.is_taken:
-            res += f'<div style="margin-top:30px,width:200px"><a href="{reverse("app:not_is_taken", args=[obj.id])}" style="display:block;width:100px;background:#9f0000;margin-top:10px;" class="button">Olib ketmagan</a></div>'
-        else:
-            res += f'<div style="margin-top:30px,width:200px"><a href="{reverse("app:is_taken", args=[obj.id])}" style="display:block;width:100px;margin-top:10px;" class="button">Olib ketgan</a></div>'
-
-        if obj.is_china:
-            res += f'<div style="margin-top:30px,width:200px"><a href="{reverse("app:not_is_china", args=[obj.id])}" style="display:block;width:100px;background:#9f0000;margin-top:10px;" class="button">Xitoyda emas</a></div>'
-        else:
-            res += f'<div style="margin-top:30px,width:200px"><a href="{reverse("app:is_china", args=[obj.id])}" style="display:block;width:100px;margin-top:10px;" class="button">Xitoyda</a></div>'
-        return mark_safe(res)
-
-    change_status.short_description = "Statusni o'zgartirish"
+    change_status_buttons.short_description = "Holatini o'zgartirish"
 
 
 @admin.register(CreatedAt)
