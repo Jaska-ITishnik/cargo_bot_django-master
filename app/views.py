@@ -14,7 +14,7 @@ def toggle_is_arrived(request, product_id):
     uzbek_address_uz = Address.objects.all().last().address_uzbek_uz
     uzbek_address_ru = Address.objects.all().last().address_uzbek_ru
     product = get_object_or_404(Product, id=product_id)
-    if product.user:
+    if product.user and not product.is_arrived:
         if product.user.lang == 'uz':
             if product.image:
                 send_telegram_notification(
@@ -53,7 +53,7 @@ def toggle_is_arrived(request, product_id):
 @csrf_exempt
 def toggle_is_taken(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    if product.user:
+    if product.user and not product.is_taken:
         if product.user.lang == 'uz':
             send_telegram_notification(taken_order[product.user.lang].format(product.trek_code), product.user.tg_id)
         else:
@@ -70,7 +70,7 @@ def toggle_is_taken(request, product_id):
 @csrf_exempt
 def toggle_is_china(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    if product.user:
+    if product.user and not product.is_china:
         send_telegram_notification(
             arrived_china[product.user.lang].format(product.trek_code, product.name, product.own_kg,
                                                     product.standart_kg),
