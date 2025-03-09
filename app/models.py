@@ -123,6 +123,14 @@ class Product(models.Model):
                                 default=0.00)
 
     def save(self, *args, **kwargs):
+        if all(
+                value in [None, "", 0]
+                for value in [self.user, self.unregistered_user_phone, self.trek_code,
+                              self.name, self.quantity, self.tall, self.width, self.height,
+                              self.standart_kg, self.own_kg, self.price, self.service_price, self.summary,
+                              self.is_china, self.is_arrived, self.is_taken, self.daofu]
+        ):
+            return
         stan_kg = 0
         if self.tall and self.width and self.height:
             stan_kg = (self.tall * self.width * self.height) / 6000

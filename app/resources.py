@@ -197,6 +197,16 @@ class ProductResource(resources.ModelResource):
             'id', 'consignment', 'user', 'trek_code', 'name', 'quantity', 'tall', 'width', 'height', 'standart_kg',
             'own_kg', 'price', 'service_price', 'summary', 'is_arrived', 'is_taken', 'daofu')
 
+    def before_import_row(self, row, **kwargs):
+        """Skip rows where critical fields are missing to prevent errors"""
+        critical_fields = ['own_kg', 'service_price']
+
+        # Check if any critical field is missing
+        if any(row.get(field) in [None, ""] for field in critical_fields):
+            return None  # Skip this row
+
+        return super().before_import_row(row, **kwargs)
+
 
 class ReferalResource(resources.ModelResource):
     name = Field(column_name='Nomi', attribute='name')
