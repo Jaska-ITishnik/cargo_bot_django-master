@@ -2,6 +2,7 @@
 {% load custom_tag %}
 {% if app_list %}
     {% for app in app_list %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <div class="app-{{ app.app_label }} module{% if app.app_url in request.path|urlencode %} current-app{% endif %}">
             <table>
                 <caption>
@@ -20,7 +21,7 @@
                                    aria-current="page"{% endif %}>
                                     {{ model.name }}
                                     <span style="position: relative; display: inline-block;">
-                    <i class="fa fa-bell" style="font-size: 20px; color: #417690;"></i>
+                    <i class="fas fa-bell" style="font-size: 20px; color: #417690;"></i>
                     <span style="position: absolute; top: -5px; right: -10px; background: #417690; color: #ffffff; border-radius: 50%; padding: 1px 5px; font-size: 12px;">
                       {{ model.count }}
                     </span>

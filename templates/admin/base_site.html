@@ -36,11 +36,40 @@
             height: 15px;
             margin-right: 5px;
         }
+
+        .translation-btn {
+            /* Basic button styling */
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Green color - you can change this */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Hover effect */
+        .translation-btn:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+
+        /* Active/Click effect */
+        .translation-btn:active {
+            background-color: #3d8b40;
+            transform: translateY(0);
+        }
     </style>
 {% endblock %}
 
 {% block userlinks %}
     <div class="language-list">
+        <a href="http://{{ request.headers.Host }}/rosetta/files/project/" class="translation-btn">
+            {% trans "Tarjimalar" %}
+        </a>
         {% for code, name in languages.items %}
             <a href="{{ request|switch_i18n:code }}">
                 {% if code == 'en' %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-13 03:32+0500\n"
+"POT-Creation-Date: 2025-03-13 10:24+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -463,19 +463,19 @@ msgstr "被拿走"
 msgid "Olib ketilmagan"
 msgstr "他没接"
 
-#: root/settings.py:96
+#: root/settings.py:97
 msgid "English"
 msgstr "英语"
 
-#: root/settings.py:97
+#: root/settings.py:98
 msgid "Russian"
 msgstr "俄语"
 
-#: root/settings.py:98
+#: root/settings.py:99
 msgid "Uzbek"
 msgstr "乌兹别克语"
 
-#: root/settings.py:99
+#: root/settings.py:100
 msgid "Chinese"
 msgstr "中国人"
 
@@ -512,15 +512,19 @@ msgstr "改变"
 msgid "You don’t have permission to view or edit anything."
 msgstr "您无权查看或编辑任何内容。"
 
-#: templates/admin/base_site.html:61
+#: templates/admin/base_site.html:71
+msgid "Tarjimalar"
+msgstr "翻译"
+
+#: templates/admin/base_site.html:90
 msgid "Documentation"
 msgstr "文档"
 
-#: templates/admin/base_site.html:65
+#: templates/admin/base_site.html:94
 msgid "Change password"
 msgstr "更改密码"
 
-#: templates/admin/base_site.html:67
+#: templates/admin/base_site.html:96
 msgid "Log out"
 msgstr "退出"
 

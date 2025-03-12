@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-13 03:32+0500\n"
+"POT-Creation-Date: 2025-03-13 10:24+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -468,19 +468,19 @@ msgstr ""
 msgid "Olib ketilmagan"
 msgstr ""
 
-#: root/settings.py:96
+#: root/settings.py:97
 msgid "English"
 msgstr "Ingiliz"
 
-#: root/settings.py:97
+#: root/settings.py:98
 msgid "Russian"
 msgstr "Rus"
 
-#: root/settings.py:98
+#: root/settings.py:99
 msgid "Uzbek"
 msgstr "Uzbek"
 
-#: root/settings.py:99
+#: root/settings.py:100
 msgid "Chinese"
 msgstr "Xitoy"
 
@@ -517,15 +517,21 @@ msgstr "O'zgartirish"
 msgid "You don’t have permission to view or edit anything."
 msgstr "Sizda biror narsani ko‘rish yoki tahrirlash uchun ruxsatingiz yo‘q."
 
-#: templates/admin/base_site.html:61
+#: templates/admin/base_site.html:71
+#, fuzzy
+#| msgid "Partiya"
+msgid "Tarjimalar"
+msgstr "Tarjimalar"
+
+#: templates/admin/base_site.html:90
 msgid "Documentation"
 msgstr "Hujjatlar"
 
-#: templates/admin/base_site.html:65
+#: templates/admin/base_site.html:94
 msgid "Change password"
 msgstr "Parolni o'zgartirish"
 
-#: templates/admin/base_site.html:67
+#: templates/admin/base_site.html:96
 msgid "Log out"
 msgstr "Chiqish"
 
