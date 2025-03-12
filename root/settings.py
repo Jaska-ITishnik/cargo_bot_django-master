@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'dal',
     'dal_select2',
     'admin_interface',
-    'colorfield'
+    'colorfield',
+    'rosetta'
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'  # only if django version >= 3.0
@@ -69,7 +70,7 @@ DATABASES = {
         'USER': 'postgres',
         'HOST': 'localhost',
         'PORT': 5432,
-        'PASSWORD': 100
+        'PASSWORD': 1
     }
 }
 
@@ -115,11 +116,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# MEDIA_URL = 'media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
 
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = '/var/www/cargo_bot-master/root/cargo_admin/media'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/var/www/cargo_bot-master/root/cargo_admin/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 IMPORT_EXPORT_ESCAPE_FORMULAE_ON_EXPORT = True
