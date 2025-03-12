@@ -3,6 +3,7 @@ from decimal import Decimal
 
 from django.db import models
 from django.db.models import CharField
+from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv
 
 # Create your models here.
@@ -28,24 +29,24 @@ load_dotenv()
 
 
 class User(models.Model):
-    full_name = models.CharField(max_length=255, null=True, verbose_name="To'liq ismi")
-    phone_number = models.CharField(max_length=255, null=True, verbose_name="Telefon raqam")
-    phone_number2 = models.CharField(max_length=255, null=True, blank=True, verbose_name="Telefon raqam 2")
-    lang = models.CharField(max_length=2, choices=LANGUAGE, default="uz", null=True, verbose_name="Til")
-    passport1 = models.ImageField(upload_to='users/passports', null=True, verbose_name="Passport old tomoni")
-    passport2 = models.ImageField(upload_to='users/passports', null=True, verbose_name="Passport orqa tomoni")
+    full_name = models.CharField(max_length=255, null=True, verbose_name=_("To'liq ismi"))
+    phone_number = models.CharField(max_length=255, null=True, verbose_name=_("Telefon raqam"))
+    phone_number2 = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("Telefon raqam 2"))
+    lang = models.CharField(max_length=2, choices=LANGUAGE, default="uz", null=True, verbose_name=_("Til"))
+    passport1 = models.ImageField(upload_to='users/passports', null=True, verbose_name=_("Passport old tomoni"))
+    passport2 = models.ImageField(upload_to='users/passports', null=True, verbose_name=_("Passport orqa tomoni"))
     latitude = models.FloatField(null=True)  #
     longitude = models.FloatField(null=True)  #
-    id_code = models.CharField(max_length=255, null=True, verbose_name="ID kod")
+    id_code = models.CharField(max_length=255, null=True, verbose_name=_("ID kod"))
     is_active = models.BooleanField(default=False, null=True)  #
     tg_id = models.PositiveBigIntegerField(null=True)  #
-    image = models.ImageField(upload_to='users/image', null=True, verbose_name="Rasm")
-    is_standart = models.BooleanField(default=False, null=True, verbose_name="Standart mi?")
-    is_kg = models.BooleanField(default=False, null=True, verbose_name="Kg mi?")
+    image = models.ImageField(upload_to='users/image', null=True, verbose_name=_("Rasm"))
+    is_standart = models.BooleanField(default=False, null=True, verbose_name=_("Standart mi?"))
+    is_kg = models.BooleanField(default=False, null=True, verbose_name=_("Kg mi?"))
     default_price = models.DecimalField(blank=True, null=True, max_digits=15, decimal_places=2,
-                                        verbose_name="Maxsus narx")
-    referal = models.ForeignKey('Referal', on_delete=models.CASCADE, null=True, blank=True, verbose_name="Реферал")
-    types = models.CharField(choices=TYPES, default="A", max_length=1, verbose_name='Tip')
+                                        verbose_name=_("Maxsus narx"))
+    referal = models.ForeignKey('Referal', on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("Реферал"))
+    types = models.CharField(choices=TYPES, default="A", max_length=1, verbose_name=_('Tip'))
 
     def __str__(self):
         return self.id_code or "Not full user"
@@ -65,61 +66,64 @@ class User(models.Model):
         super(User, self).save(*args, **kwargs)
 
     class Meta:
-        verbose_name = "Foydalanuvchi"
-        verbose_name_plural = "Foydalanuvchilar"
+        verbose_name = _("Foydalanuvchi")
+        verbose_name_plural = _("Foydalanuvchilar")
         db_table = 'users'
 
 
 class CreatedAt(models.Model):
-    date = models.DateField(verbose_name="Sana")
-    consignment = models.CharField(max_length=15, choices=CONSIGNMENT, default="Birinchi", verbose_name="Partiya")
-    expenses = models.DecimalField(max_digits=15, decimal_places=2, default=0, verbose_name="Xarajatlar")
+    batch_name = CharField(max_length=50, null=True, blank=True, unique=True, verbose_name=_("Partiya nomi"))
+    date = models.DateField(verbose_name=_("Sana"))
+    consignment = models.CharField(max_length=15, choices=CONSIGNMENT, default="Birinchi", verbose_name=_("Partiya"))
+    expenses = models.DecimalField(max_digits=15, decimal_places=2, default=0, verbose_name=_("Xarajatlar"))
     transport_expenses = models.DecimalField(max_digits=15, decimal_places=2, default=0,
-                                             verbose_name="Transport xarajatlar")
-    tax = models.DecimalField(max_digits=15, decimal_places=2, default=0, verbose_name="Naloglar")
-    add_expenses = models.DecimalField(max_digits=15, decimal_places=2, default=0, verbose_name="Qo'shimcha xarajatlar")
+                                             verbose_name=_("Transport xarajatlar"))
+    tax = models.DecimalField(max_digits=15, decimal_places=2, default=0, verbose_name=_("Naloglar"))
+    add_expenses = models.DecimalField(max_digits=15, decimal_places=2, default=0,
+                                       verbose_name=_("Qo'shimcha xarajatlar"))
     kg = models.DecimalField(max_digits=15, decimal_places=2,
-                             verbose_name="KG")
-    from_who = models.CharField(max_length=255, verbose_name="Kimdan")
-    to_who = models.CharField(max_length=255, verbose_name="Kimga")
-    yuan_dollar = models.DecimalField(max_digits=15, decimal_places=2)
-    dollar_sum = models.DecimalField(max_digits=15, decimal_places=2)
+                             verbose_name=_("KG"))
+    from_who = models.CharField(max_length=255, verbose_name=_("Kimdan"))
+    to_who = models.CharField(max_length=255, verbose_name=_("Kimga"))
+    yuan_dollar = models.DecimalField(max_digits=15, decimal_places=2, verbose_name=_("Yuan Dollar"))
+    dollar_sum = models.DecimalField(max_digits=15, decimal_places=2, verbose_name=_("Dollar Sum"))
 
     def __str__(self):
         return f"{self.date} -> {self.consignment}"
 
     class Meta:
-        verbose_name = "Partiya"
-        verbose_name_plural = "Partiyalar"
+        verbose_name = _("Partiya")
+        verbose_name_plural = _("Partiyalar")
         db_table = 'created_at'
 
 
 class Product(models.Model):
     consignment = models.ForeignKey(CreatedAt, on_delete=models.CASCADE, related_name='products',
-                                    verbose_name="Partiya")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products', verbose_name="Egasi", null=True,
+                                    verbose_name=_("Partiya"))
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products', verbose_name=_("Egasi"),
+                             null=True,
                              blank=True)
     unregistered_user_phone = CharField(max_length=20, null=True, blank=True,
-                                        verbose_name="register bo'lmagan")
-    trek_code = models.CharField(max_length=255, null=True, verbose_name="Trek kod")
-    name = models.CharField(max_length=255, null=True, verbose_name="Nomi", blank=True)
-    quantity = models.PositiveBigIntegerField(verbose_name="Soni", null=True, blank=True)
-    tall = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Uzunlik", null=True, blank=True)
-    width = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Kenglik", null=True, blank=True)
-    height = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Balanglik", null=True, blank=True)
+                                        verbose_name=_("register bo'lmagan"))
+    trek_code = models.CharField(max_length=255, null=True, verbose_name=_("Trek kod"))
+    name = models.CharField(max_length=255, null=True, verbose_name=_("Nomi"), blank=True)
+    quantity = models.PositiveBigIntegerField(verbose_name=_("Soni"), null=True, blank=True)
+    tall = models.DecimalField(max_digits=15, decimal_places=2, verbose_name=_("Uzunlik"), null=True, blank=True)
+    width = models.DecimalField(max_digits=15, decimal_places=2, verbose_name=_("Kenglik"), null=True, blank=True)
+    height = models.DecimalField(max_digits=15, decimal_places=2, verbose_name=_("Balanglik"), null=True, blank=True)
     # (boyi * eni * balandligi) / 6000
     standart_kg = models.DecimalField(max_digits=15, decimal_places=2,
-                                      verbose_name="Standart kg")
-    own_kg = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Og'irligi")
-    price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Tovar narxi")
-    service_price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Xizmat narxi")
-    summary = models.DecimalField(max_digits=15, decimal_places=2, null=True, verbose_name="Umumiy", blank=True,
+                                      verbose_name=_("Standart kg"))
+    own_kg = models.DecimalField(max_digits=15, decimal_places=2, verbose_name=_("Og'irligi"))
+    price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name=_("Tovar narxi"))
+    service_price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name=_("Xizmat narxi"))
+    summary = models.DecimalField(max_digits=15, decimal_places=2, null=True, verbose_name=_("Umumiy"), blank=True,
                                   default=0.00)
-    is_arrived = models.BooleanField(default=False, verbose_name="Uzb ga kelganmi?", null=True, blank=True)
-    is_taken = models.BooleanField(default=False, verbose_name="Klientni qolidami?", null=True, blank=True)
-    is_china = models.BooleanField(default=False, verbose_name="Xitoy skladidami?", null=True, blank=True)
-    image = models.ImageField(upload_to='products', null=True, blank=True, verbose_name="Rasm")
-    daofu = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Daofu", null=True, blank=True,
+    is_arrived = models.BooleanField(default=False, verbose_name=_("Uzb ga kelganmi?"), null=True, blank=True)
+    is_taken = models.BooleanField(default=False, verbose_name=_("Klientni qolidami?"), null=True, blank=True)
+    is_china = models.BooleanField(default=False, verbose_name=_("Xitoy skladidami?"), null=True, blank=True)
+    image = models.ImageField(upload_to='products', null=True, blank=True, verbose_name=_("Rasm"))
+    daofu = models.DecimalField(max_digits=15, decimal_places=2, verbose_name=_("Daofu"), null=True, blank=True,
                                 default=0.00)
 
     def save(self, *args, **kwargs):
@@ -162,19 +166,19 @@ class Product(models.Model):
         return f"¥{self.daofu}"
 
     class Meta:
-        verbose_name = "Tovar"
-        verbose_name_plural = "Tovarlar"
+        verbose_name = _("Tovar")
+        verbose_name_plural = _("Tovarlar")
         db_table = 'products'
 
 
 class Referal(models.Model):
-    name = models.CharField(max_length=255, unique=True, verbose_name="Nomi")
-    quantity = models.PositiveBigIntegerField(default=0, verbose_name="Soni")
-    link = models.URLField(max_length=255, null=True, blank=True, verbose_name="Ссылка")
+    name = models.CharField(max_length=255, unique=True, verbose_name=_("Nomi"))
+    quantity = models.PositiveBigIntegerField(default=0, verbose_name=_("Soni"))
+    link = models.URLField(max_length=255, null=True, blank=True, verbose_name=_("Ссылка"))
 
     class Meta:
-        verbose_name = "Referal"
-        verbose_name_plural = "Referallar"
+        verbose_name = _("Referal")
+        verbose_name_plural = _("Referallar")
         db_table = 'referal'
 
     def __str__(self):
@@ -187,37 +191,37 @@ class Referal(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Kimdan")
-    comment = models.TextField(verbose_name="Izoh")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("Kimdan"))
+    comment = models.TextField(verbose_name=_("Izoh"))
 
     class Meta:
-        verbose_name = "Izoh"
-        verbose_name_plural = "Izohlar"
+        verbose_name = _("Izoh")
+        verbose_name_plural = _("Izohlar")
         db_table = 'comments'
 
 
 class Phones(models.Model):
-    phone = models.CharField(max_length=13, verbose_name='Telefon raqam',
-                             help_text="Plus belgisi bilan jami 13 ta belgi bolishi kerak")
+    phone = models.CharField(max_length=13, verbose_name=_('Telefon raqam'),
+                             help_text=_("Plus belgisi bilan jami 13 ta belgi bolishi kerak"))
 
     def __str__(self):
         return self.phone
 
     class Meta:
-        verbose_name = "Telefon"
-        verbose_name_plural = "Telefonlar"
+        verbose_name = _("Telefon")
+        verbose_name_plural = _("Telefonlar")
         db_table = 'phones'
 
 
 class ActivePhone(models.Model):
-    phone = models.ForeignKey(Phones, on_delete=models.CASCADE, verbose_name="Aktiv telefon")
+    phone = models.ForeignKey(Phones, on_delete=models.CASCADE, verbose_name=_("Aktiv telefon"))
 
     def __str__(self):
         return self.phone
 
     class Meta:
-        verbose_name = "Aktiv telefon"
-        verbose_name_plural = "Aktiv telefon"
+        verbose_name = _("Aktiv telefon")
+        verbose_name_plural = _("Aktiv telefon")
         db_table = 'active_phones'
 
 
@@ -229,11 +233,11 @@ class Address(models.Model):
     address = CharField(max_length=255, default='北京市朝阳区定福景园7号楼3单元1002 17800293735')
     address_uzbek_uz = CharField(max_length=255,
                                  default='Toshkent shahar,Shayxontohur tumani,Kichik halqa yo’li, 147  5-qavat',
-                                 verbose_name="O'zbekiston manzili 🇺🇿")
+                                 verbose_name=_("O'zbekiston manzili 🇺🇿"))
     address_uzbek_ru = CharField(max_length=255,
                                  default='г. Ташкент, Шайхонтохурский район, Малая кольцевая дорога, 147, 5 этаж',
-                                 verbose_name="O'zbekiston manzili 🇷🇺")
+                                 verbose_name=_("O'zbekiston manzili 🇷🇺"))
 
     class Meta:
-        verbose_name = 'Manzil'
-        verbose_name_plural = 'Manzillar'
+        verbose_name = _('Manzil')
+        verbose_name_plural = _('Manzillar')

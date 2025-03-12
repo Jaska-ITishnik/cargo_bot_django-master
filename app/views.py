@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 
 from app.models import Product, User, Address
@@ -43,10 +44,11 @@ def toggle_is_arrived(request, product_id):
                     product.user.tg_id)
     product.is_arrived = not product.is_arrived
     product.save()
+    res = _('Yetib kelgan') if product.is_arrived else _('Yetib kelmagan')
     return JsonResponse({
         'success': True,
         'product_id': product.id,
-        'status_html': f"{'Yetib kelgan' if product.is_arrived else 'Yetib kelmagan'}"
+        'status_html': f"{res}"
     })
 
 
@@ -60,10 +62,11 @@ def toggle_is_taken(request, product_id):
             send_telegram_notification(taken_order[product.user.lang].format(product.trek_code), product.user.tg_id)
     product.is_taken = not product.is_taken
     product.save()
+    res = _('Olib ketilgan') if product.is_taken else _('Olib ketilmagan')
     return JsonResponse({
         'success': True,
         'product_id': product.id,
-        'status_html': f"{'Olib ketilgan' if product.is_taken else 'Olib ketilmagan'}"
+        'status_html': f"{res}"
     })
 
 
@@ -77,10 +80,11 @@ def toggle_is_china(request, product_id):
             product.user.tg_id)
     product.is_china = not product.is_china
     product.save()
+    res = _('Xitoyda') if product.is_china else _('Xitoyda emas')
     return JsonResponse({
         'success': True,
         'product_id': product.id,
-        'status_html': f"{'Xitoyda' if product.is_china else 'Xitoyda emas'}"
+        'status_html': f"{res}"
     })
 
 

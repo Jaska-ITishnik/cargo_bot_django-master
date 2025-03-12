@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv
 from import_export.formats.base_formats import XLSX, CSV
 
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
 X_FRAME_OPTIONS = 'SAMEORIGIN'  # only if django version >= 3.0
 
 MIDDLEWARE = [
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,6 +54,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app.context_processors.languages'
             ],
         },
     },
@@ -86,6 +89,22 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'uz'
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale')
+]
+LANGUAGES = [
+    ('en', _('English')),
+    ('ru', _('Russian')),
+    ('uz', _('Uzbek')),
+    ('zh', _('Chinese')),
+]
+
+languages_dict = {
+    "en": "English",
+    "ru": "Russia",
+    "uz": "Uzbek",
+    'zh': "Chinese"
+}
 
 TIME_ZONE = 'Asia/Tashkent'
 

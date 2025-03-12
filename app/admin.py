@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 from django.contrib.auth.models import Group
 from django.urls import reverse
+from django.utils.html import format_html
+from django.utils.translation import gettext_lazy as _
 from import_export.admin import ImportExportActionModelAdmin
 
 from app.forms import ProductForm
@@ -51,7 +53,7 @@ class UserAdmin(ImportExportActionModelAdmin):
             return r[0][1]
         return 0
 
-    summary.short_description = 'Umumiy summa'
+    summary.short_description = _('Umumiy summa')
 
     def qoshimcha_tel(self, obj):
         if obj.phone_number2:
@@ -59,36 +61,36 @@ class UserAdmin(ImportExportActionModelAdmin):
         else:
             return '-'
 
-    qoshimcha_tel.short_description = "Qo'shimcha telefon"
+    qoshimcha_tel.short_description = _("Qo'shimcha telefon")
 
     def oldi_passport(self, obj):
         if obj.passport1:
             return mark_safe(
                 f'<a href="{obj.passport1.url}"><img src="{obj.passport1.url}" width="70px" height="70px"></a>')
         else:
-            return "Rasmi yo'q"
+            return _("Rasmi yo'q")
 
-    oldi_passport.short_description = "Pasport old tomoni"
+    oldi_passport.short_description = _("Pasport old tomoni")
 
     def orqa_passport(self, obj):
         if obj.passport2:
             return mark_safe(
                 f'<a href="{obj.passport2.url}"><img src="{obj.passport2.url}" width="70px" height="70px"></a>')
         else:
-            return "Rasm yo'q"
+            return _("Rasm yo'q")
 
-    orqa_passport.short_description = "Pasport orqa tomoni"
+    orqa_passport.short_description = _("Pasport orqa tomoni")
 
     def rasmi(self, obj):
         if obj.image:
             return mark_safe(f'<a href="{obj.image.url}"><img src="{obj.image.url}" width="70px" height="70px"></a>')
         else:
-            return "Rasmi yo'q"
+            return _("Rasmi yo'q")
 
     def __str__(self):
         return f"{self.full_name} ({self.id_code})" if self.full_name and self.id_code else "Unnamed User"
 
-    rasmi.short_description = "Rasmi"
+    rasmi.short_description = _("Rasmi")
 
 
 @admin.register(Comment)
@@ -107,20 +109,21 @@ class ReferalAdmin(ImportExportActionModelAdmin):
     def total_products(self, obj):
         return Product.objects.filter(user__referal=obj).count()
 
-    total_products.short_description = "Jami tovarlar"
+    total_products.short_description = _("Jami tovarlar")
 
     def total_summary(self, obj):
         r = Product.objects.filter(user__referal=obj).values_list('summary', flat=True)
         if len(r) >= 1:
             return r
 
-    total_summary.short_description = "Umumiy summa"
+    total_summary.short_description = _("Umumiy summa")
 
 
 @admin.register(Product)
 class ProductAdmin(ImportExportActionModelAdmin):
     list_display = (
-        'user_id_code', 'unregistered_user_phone', 'trek_code', 'name', 'quantity', 'tall', 'width', 'height',
+        'consignment', 'user_id_code', 'unregistered_user_phone', 'trek_code', 'name', 'quantity', 'tall', 'width',
+        'height',
         'standart_kg',
         'own_kg', 'dafousi', 'Xizmat_narxi', 'daofu_calculation', 'user_full_name', 'phone_number', 'status',
         'change_status_buttons', 'photo')
@@ -166,56 +169,59 @@ class ProductAdmin(ImportExportActionModelAdmin):
         return mark_safe(res)
 
     def change_status_buttons(self, obj):
+        arrived_text = _('Yetib kelgan') if obj.is_arrived else _('Yetib kelmagan')
+        taken_text = _('Olib ketgan') if obj.is_taken else _('Olib ketmagan')
+        china_text = _('Xitoyda') if obj.is_china else _('Xitoyda emas')
+
         return mark_safe(f"""
             <div id="status-{obj.id}">
                 <a href="#" 
                     class="status-change-button"
                     style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px 10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_arrived else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
-                    data-url="{reverse('app:toggle_is_arrived', args=[obj.id])}">{'Yetib kelgan' if obj.is_arrived else 'Yetib kelmagan'}
-                </a>
+                    data-url="{reverse('app:toggle_is_arrived', args=[obj.id])}">{arrived_text}</a>
                 <a href="#"  
                     class="status-change-button"
-                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px  10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_taken else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
-                    data-url="{reverse('app:toggle_is_taken', args=[obj.id])}">{'Olib ketgan' if obj.is_taken else 'Olib ketmagan'}</a>
+                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px 10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_taken else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
+                    data-url="{reverse('app:toggle_is_taken', args=[obj.id])}">{taken_text}</a>
                 <a href="#"  
                     class="status-change-button"
-                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px  10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_china else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
-                    data-url="{reverse('app:toggle_is_china', args=[obj.id])}">{'Xitoyda' if obj.is_china else 'Xitoyda emas'}</a>
+                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px 10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_china else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
+                    data-url="{reverse('app:toggle_is_china', args=[obj.id])}">{china_text}</a>
             </div>
         """)
 
-    change_status_buttons.short_description = "Holatini o'zgartirish"
+    change_status_buttons.short_description = _("Holatini o'zgartirish")
 
     def user_id_code(self, obj):
         if obj.user:
             return obj.user.id_code
         return "ro'yxatdan o'tilmagan -> "
 
-    user_id_code.short_description = 'Egasining ID kodi'
+    user_id_code.short_description = _('Egasining ID kodi')
 
     def user_full_name(self, obj):
         if obj.user:
             return obj.user.full_name
         return "-"
 
-    user_full_name.short_description = "Egasining to'liq ismi"
+    user_full_name.short_description = _("Egasining to'liq ismi")
 
     def phone_number(self, obj):
         if obj.user:
             return obj.user.phone_number
         return '-'
 
-    phone_number.short_description = "Egasining telefon raqami"
+    phone_number.short_description = _("Egasining telefon raqami")
 
     def photo(self, obj):
         if obj.image:
             return mark_safe(f'<a href="{obj.image.url}"><img src="{obj.image.url}" width="70px" height="70px"></a>')
         else:
-            return "Rasmi yo'q"
+            return _("Rasmi yo'q")
 
-    photo.short_description = 'Mahsulot fotosurati'
+    photo.short_description = _('Mahsulot fotosurati')
 
-    @admin.display(description='Jami')
+    @admin.display(description=_('Jami'))
     def daofu_calculation(self, obj: Product):
         if obj.daofu:
             return f"💲{round(obj.own_kg * obj.service_price + obj.daofu / obj.consignment.yuan_dollar, 2)}"
@@ -234,7 +240,7 @@ class NotRegisteredProductProxyModelAdmin(ImportExportActionModelAdmin):
     class Media:
         js = 'app/js/without_refresh.js',
 
-    @admin.display(description='Jami')
+    @admin.display(description=_('Jami'))
     def daofu_calculation(self, obj: Product):
         if obj.daofu:
             return round(obj.own_kg * obj.service_price + obj.daofu / obj.consignment.yuan_dollar, 2)
@@ -268,46 +274,59 @@ class NotRegisteredProductProxyModelAdmin(ImportExportActionModelAdmin):
         return mark_safe(res)
 
     def change_status_buttons(self, obj):
+        arrived_text = _('Yetib kelgan') if obj.is_arrived else _('Yetib kelmagan')
+        taken_text = _('Olib ketgan') if obj.is_taken else _('Olib ketmagan')
+        china_text = _('Xitoyda') if obj.is_china else _('Xitoyda emas')
+
         return mark_safe(f"""
             <div id="status-{obj.id}">
                 <a href="#" 
                     class="status-change-button"
                     style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px 10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_arrived else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
-                    data-url="{reverse('app:toggle_is_arrived', args=[obj.id])}">{'Yetib kelgan' if obj.is_arrived else 'Yetib kelmagan'}
-                </a>
+                    data-url="{reverse('app:toggle_is_arrived', args=[obj.id])}">{arrived_text}</a>
                 <a href="#"  
                     class="status-change-button"
-                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px  10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_taken else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
-                    data-url="{reverse('app:toggle_is_taken', args=[obj.id])}">{'Olib ketgan' if obj.is_taken else 'Olib ketmagan'}</a>
+                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px 10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_taken else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
+                    data-url="{reverse('app:toggle_is_taken', args=[obj.id])}">{taken_text}</a>
                 <a href="#"  
                     class="status-change-button"
-                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px  10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_china else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
-                    data-url="{reverse('app:toggle_is_china', args=[obj.id])}">{'Xitoyda' if obj.is_china else 'Xitoyda emas'}</a>
+                    style="display: inline-block; margin-top: 10px; width: 100px; padding: 10px 10px; text-align: center; text-decoration: none; color: #fff; background-color: {'#007bff' if obj.is_china else 'red'}; border: 1px solid #ffc107; border-radius: 5px; font-size: 14px; transition: background-color 0.3s ease, color 0.3s ease;"
+                    data-url="{reverse('app:toggle_is_china', args=[obj.id])}">{china_text}</a>
             </div>
         """)
 
-    change_status_buttons.short_description = "Holatini o'zgartirish"
+    change_status_buttons.short_description = _("Holatini o'zgartirish")
 
 
 @admin.register(CreatedAt)
 class CreatedAtAdmin(ImportExportActionModelAdmin):
     list_display = [
-        'id', 'date', 'consignment', 'expenses', 'transport_expenses',
+        'batch_name', 'readies', 'date', 'consignment', 'expenses', 'transport_expenses',
         'tax', 'add_expenses', 'summary_weight', 'kg', 'general_sum',
         'general_expenses', 'general_profit', 'kg1', 'from_who',
         'to_who', 'yuan_dollar', 'dollar_sum'
     ]
+    search_fields = 'batch_name',
     list_filter = 'date', 'consignment'
     resource_class = CreatedAtResource
 
-    @admin.display(description="Umumiy og'irlik")
+    @admin.display(description=_('Partiyaning tovarlari'))
+    def readies(self, obj: CreatedAt):
+        count = Product.objects.filter(consignment=obj).count()
+        if count > 0:
+            url = reverse(f'admin:{obj._meta.app_label}_{Product._meta.model_name}_changelist')
+            url += f'?consignment__id__exact={obj.id}'
+            return format_html('<a href="{}">{}</a>', url, count)
+        return count
+
+    @admin.display(description=_("Umumiy og'irlik"))
     def summary_weight(self, obj: CreatedAt):
         r = Product.objects.filter(consignment=obj).values_list('own_kg', flat=True)
         if len(r) >= 1:
             return sum(r)
         return 0
 
-    @admin.display(description="Jami")
+    @admin.display(description=_("Jami"))
     def general_sum(self, obj: CreatedAt):
         products = Product.objects.filter(consignment=obj)
         all_amount = []
@@ -319,9 +338,9 @@ class CreatedAtAdmin(ImportExportActionModelAdmin):
     def general_expenses(self, obj):
         if obj.expenses and obj.transport_expenses and obj.tax and obj.add_expenses:
             return obj.expenses + obj.transport_expenses + obj.tax + obj.add_expenses
-        return 'Aniq emas'
+        return _('Aniq emas')
 
-    general_expenses.short_description = 'Umumiy xarajatlar'
+    general_expenses.short_description = _('Umumiy xarajatlar')
 
     def general_profit(self, obj):
         r = obj.products.all().values_list('summary', flat=True)
@@ -333,15 +352,15 @@ class CreatedAtAdmin(ImportExportActionModelAdmin):
             expenses = obj.expenses + obj.transport_expenses + obj.tax + obj.add_expenses
         return summary - expenses
 
-    general_profit.short_description = 'Umumiy xarajatlar'
+    general_profit.short_description = _('Umumiy xarajatlar')
 
     def kg1(self, obj):
         if obj.expenses is not None and obj.transport_expenses is not None and obj.tax is not None and obj.add_expenses is not None:
             res = obj.expenses + obj.transport_expenses + obj.tax + obj.add_expenses
             return res / obj.kg
-        return "Aniq emas"
+        return _("Aniq emas")
 
-    kg1.short_description = '1 kg uchun'
+    kg1.short_description = _('1 kg uchun')
 
 
 @admin.register(Address)

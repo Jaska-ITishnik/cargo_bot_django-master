@@ -1,44 +1,45 @@
 from import_export import resources
 from import_export.fields import Field
 from import_export.widgets import ForeignKeyWidget, BooleanWidget, FloatWidget, DateWidget, IntegerWidget
+from django.utils.translation import gettext_lazy as _
 
 from app.models import User, Referal, CreatedAt, Product
 
 
 class UserResource(resources.ModelResource):
     full_name = Field(
-        column_name="To'liq ismi",
+        column_name=_("To'liq ismi"),
         attribute='full_name',
     )
     phone_number = Field(
-        column_name='Telefon nomeri',
+        column_name=_('Telefon nomeri'),
         attribute='phone_number',
     )
     phone_number2 = Field(
-        column_name="Telefon nomeri (qo'sh)",
+        column_name=_("Telefon nomeri (qo'sh)"),
         attribute='phone_number2',
     )
     id_code = Field(
-        column_name='ID kod',
+        column_name=_('ID kod'),
         attribute='id_code',
     )
     is_standart = Field(
-        column_name='Standartmi',
+        column_name=_('Standartmi'),
         attribute='is_standart',
         widget=BooleanWidget()
     )
     is_kg = Field(
-        column_name='Kg mi',
+        column_name=_('Kg mi'),
         attribute='is_kg',
         widget=BooleanWidget()
     )
     default_price = Field(
-        column_name='Standart narx',
+        column_name=_('Standart narx'),
         attribute='default_price',
         widget=FloatWidget()
     )
     referal = Field(
-        column_name='Refferal',
+        column_name=_('Refferal'),
         attribute='referal',
         widget=ForeignKeyWidget(Referal, field='name')
     )
@@ -51,45 +52,45 @@ class UserResource(resources.ModelResource):
 
 class CreatedAtResource(resources.ModelResource):
     date = Field(
-        column_name='Sana',
+        column_name=_('Sana'),
         attribute='date',
         widget=DateWidget(format="%d.%m.%Y")
     )
     consignment = Field(
-        column_name='Partiya',
+        column_name=_('Partiya'),
         attribute='consignment',
     )
     expenses = Field(
-        column_name='Xarajatlar',
+        column_name=_('Xarajatlar'),
         attribute='expenses',
         widget=FloatWidget()
     )
     transport_expenses = Field(
-        column_name='Transport xarajatlari',
+        column_name=_('Transport xarajatlari'),
         attribute='transport_expenses',
         widget=FloatWidget()
     )
     tax = Field(
-        column_name='Soqlilar',
+        column_name=_('Soqlilar'),
         attribute='tax',
         widget=FloatWidget()
     )
     add_expenses = Field(
-        column_name="Qo'shimcha. xarajatlar",
+        column_name=_("Qo'shimcha. xarajatlar"),
         attribute='add_expenses',
         widget=FloatWidget()
     )
     kg = Field(
-        column_name='Kg',
+        column_name=_('Kg'),
         attribute='kg',
         widget=FloatWidget()
     )
     from_who = Field(
-        column_name='Kim tomonidan',
+        column_name=_('Kim tomonidan'),
         attribute='from_who',
     )
     to_who = Field(
-        column_name='Kimga',
+        column_name=_('Kimga'),
         attribute='to_who',
     )
 
@@ -102,91 +103,91 @@ class CreatedAtResource(resources.ModelResource):
 
 class ProductResource(resources.ModelResource):
     consignment = Field(
-        column_name='Partiya',
+        column_name=_('Partiya'),
         attribute='consignment',
         widget=ForeignKeyWidget(model=CreatedAt, field='pk')
     )
     user = Field(
-        column_name='Egasi',
+        column_name=_('Egasi'),
         attribute='user',
         widget=ForeignKeyWidget(User, field="id_code")
     )
 
     unregistered_user_phone = Field(
-        column_name="Ro'yxatdan o'tmagan userni telefoni",
+        column_name=_("Ro'yxatdan o'tmagan userni telefoni"),
         attribute='unregistered_user_phone',
     )
 
     trek_code = Field(
-        column_name='Trek kodi',
+        column_name=_('Trek kodi'),
         attribute='trek_code',
     )
     name = Field(
-        column_name='Nomi',
+        column_name=_('Nomi'),
         attribute='name',
     )
     quantity = Field(
-        column_name='Soni',
+        column_name=_('Soni'),
         attribute='quantity',
         widget=IntegerWidget()
     )
     tall = Field(
-        column_name='Uzunligi',
+        column_name=_('Uzunligi'),
         attribute='tall',
         widget=FloatWidget()
     )
     width = Field(
-        column_name='Kengligi',
+        column_name=_('Kengligi'),
         attribute='width',
         widget=FloatWidget()
     )
     height = Field(
-        column_name='Balandligi',
+        column_name=_('Balandligi'),
         attribute='height',
         widget=FloatWidget()
     )
     standart_kg = Field(
-        column_name="Standart og'irligi",
+        column_name=_("Standart og'irligi"),
         attribute='standart_kg',
         widget=FloatWidget()
     )
     own_kg = Field(
-        column_name='Sof vazni',
+        column_name=_('Sof vazni'),
         attribute='own_kg',
         widget=FloatWidget()
     )
     price = Field(
-        column_name='Maxsulot narxi',
+        column_name=_('Maxsulot narxi'),
         attribute='price',
         widget=FloatWidget()
     )
     service_price = Field(
-        column_name='Xizmat narxi',
+        column_name=_('Xizmat narxi'),
         attribute='service_price',
         widget=FloatWidget()
     )
     summary = Field(
-        column_name='Jami',
+        column_name=_('Jami'),
         attribute='summary',
         widget=FloatWidget()
     )
     is_china = Field(
-        column_name='Uzb ga keldimi?',
+        column_name=_('Uzb ga keldimi?'),
         attribute='is_arrived',
         widget=BooleanWidget()
     )
     is_arrived = Field(
-        column_name='Xitoyda emasmi?',
+        column_name=_('Xitoyda emasmi?'),
         attribute='is_arrived',
         widget=BooleanWidget()
     )
     is_taken = Field(
-        column_name='Klient olib kettimi?',
+        column_name=_('Klient olib kettimi?'),
         attribute='is_taken',
         widget=BooleanWidget()
     )
     daofu = Field(
-        column_name='Daofu',
+        column_name=_('Daofu'),
         attribute='daofu',
         widget=FloatWidget()
     )
@@ -209,7 +210,7 @@ class ProductResource(resources.ModelResource):
 
 
 class ReferalResource(resources.ModelResource):
-    name = Field(column_name='Nomi', attribute='name')
+    name = Field(column_name=_('Nomi'), attribute='name')
 
     class Meta:
         model = Referal
