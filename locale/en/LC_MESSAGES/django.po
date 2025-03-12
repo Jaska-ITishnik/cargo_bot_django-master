@@ -1,0 +1,541 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-13 03:32+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/admin.py:56 app/admin.py:119
+msgid "Umumiy summa"
+msgstr "Total amount"
+
+#: app/admin.py:64
+msgid "Qo'shimcha telefon"
+msgstr "Additional phone"
+
+#: app/admin.py:71 app/admin.py:88 app/admin.py:220
+msgid "Rasmi yo'q"
+msgstr "There is no photo"
+
+#: app/admin.py:73
+msgid "Pasport old tomoni"
+msgstr "The front of the passport"
+
+#: app/admin.py:80
+msgid "Rasm yo'q"
+msgstr "There is no picture"
+
+#: app/admin.py:82
+msgid "Pasport orqa tomoni"
+msgstr "The back of the passport"
+
+#: app/admin.py:93
+msgid "Rasmi"
+msgstr "Photo"
+
+#: app/admin.py:112
+msgid "Jami tovarlar"
+msgstr "Total goods"
+
+#: app/admin.py:172 app/admin.py:277 app/views.py:47
+msgid "Yetib kelgan"
+msgstr ""
+
+#: app/admin.py:172 app/admin.py:277 app/views.py:47
+msgid "Yetib kelmagan"
+msgstr ""
+
+#: app/admin.py:173 app/admin.py:278
+msgid "Olib ketgan"
+msgstr ""
+
+#: app/admin.py:173 app/admin.py:278
+msgid "Olib ketmagan"
+msgstr ""
+
+#: app/admin.py:174 app/admin.py:279 app/views.py:83
+#, fuzzy
+#| msgid "Xitoyda emasmi?"
+msgid "Xitoyda"
+msgstr "Not in China?"
+
+#: app/admin.py:174 app/admin.py:279 app/views.py:83
+#, fuzzy
+#| msgid "Xitoyda emasmi?"
+msgid "Xitoyda emas"
+msgstr "Not in China?"
+
+#: app/admin.py:193 app/admin.py:298
+msgid "Holatini o'zgartirish"
+msgstr "Change status"
+
+#: app/admin.py:200
+msgid "Egasining ID kodi"
+msgstr "Owner ID code"
+
+#: app/admin.py:207
+msgid "Egasining to'liq ismi"
+msgstr "Full name of the owner"
+
+#: app/admin.py:214
+msgid "Egasining telefon raqami"
+msgstr "Owner's phone number"
+
+#: app/admin.py:222
+msgid "Mahsulot fotosurati"
+msgstr "Product photo"
+
+#: app/admin.py:224 app/admin.py:243 app/admin.py:329 app/resources.py:170
+msgid "Jami"
+msgstr "Total"
+
+#: app/admin.py:313
+msgid "Partiyaning tovarlari"
+msgstr "Party goods"
+
+#: app/admin.py:322
+msgid "Umumiy og'irlik"
+msgstr "Total weight"
+
+#: app/admin.py:341 app/admin.py:361
+msgid "Aniq emas"
+msgstr "Not sure"
+
+#: app/admin.py:343 app/admin.py:355
+msgid "Umumiy xarajatlar"
+msgstr "General expenses"
+
+#: app/admin.py:363
+msgid "1 kg uchun"
+msgstr "for 1 kg"
+
+#: app/models.py:32 app/resources.py:11
+msgid "To'liq ismi"
+msgstr "Full name"
+
+#: app/models.py:33 app/models.py:204
+msgid "Telefon raqam"
+msgstr "Phone number"
+
+#: app/models.py:34
+msgid "Telefon raqam 2"
+msgstr "Phone number 2"
+
+#: app/models.py:35
+msgid "Til"
+msgstr "Language"
+
+#: app/models.py:36
+msgid "Passport old tomoni"
+msgstr "Passport front part"
+
+#: app/models.py:37
+msgid "Passport orqa tomoni"
+msgstr "Passport back part"
+
+#: app/models.py:40 app/resources.py:23
+msgid "ID kod"
+msgstr "ID code"
+
+#: app/models.py:43 app/models.py:125
+msgid "Rasm"
+msgstr "Photo"
+
+#: app/models.py:44
+msgid "Standart mi?"
+msgstr "Is standart?"
+
+#: app/models.py:45
+msgid "Kg mi?"
+msgstr "Is kg?"
+
+#: app/models.py:47
+msgid "Maxsus narx"
+msgstr "Special price"
+
+#: app/models.py:48
+msgid "Реферал"
+msgstr "Referral"
+
+#: app/models.py:49
+msgid "Tip"
+msgstr "Type"
+
+#: app/models.py:69
+msgid "Foydalanuvchi"
+msgstr "User"
+
+#: app/models.py:70
+msgid "Foydalanuvchilar"
+msgstr "Users"
+
+#: app/models.py:75
+#, fuzzy
+#| msgid "Partiya"
+msgid "Partiya nomi"
+msgstr "Part"
+
+#: app/models.py:76 app/resources.py:55
+msgid "Sana"
+msgstr "Date"
+
+#: app/models.py:77 app/models.py:95 app/models.py:102 app/resources.py:60
+#: app/resources.py:106
+msgid "Partiya"
+msgstr "Part"
+
+#: app/models.py:78 app/resources.py:64
+msgid "Xarajatlar"
+msgstr "Expenses"
+
+#: app/models.py:80
+msgid "Transport xarajatlar"
+msgstr "Transportation expenses"
+
+#: app/models.py:81
+msgid "Naloglar"
+msgstr "Taxes"
+
+#: app/models.py:83
+msgid "Qo'shimcha xarajatlar"
+msgstr "Additional expenses"
+
+#: app/models.py:85
+msgid "KG"
+msgstr "KG"
+
+#: app/models.py:86 app/models.py:194
+msgid "Kimdan"
+msgstr "From whom"
+
+#: app/models.py:87 app/resources.py:93
+msgid "Kimga"
+msgstr "To who"
+
+#: app/models.py:88
+#, fuzzy
+#| msgid "Manzillar"
+msgid "Yuan Dollar"
+msgstr "Addresses"
+
+#: app/models.py:89
+msgid "Dollar Sum"
+msgstr ""
+
+#: app/models.py:96
+#, fuzzy
+#| msgid "Partiya"
+msgid "Partiyalar"
+msgstr "Part"
+
+#: app/models.py:103 app/resources.py:111
+msgid "Egasi"
+msgstr "Owner"
+
+#: app/models.py:107
+msgid "register bo'lmagan"
+msgstr "Unregistered"
+
+#: app/models.py:108
+msgid "Trek kod"
+msgstr "Trek code"
+
+#: app/models.py:109 app/models.py:175 app/resources.py:126
+#: app/resources.py:213
+msgid "Nomi"
+msgstr "Name"
+
+#: app/models.py:110 app/models.py:176 app/resources.py:130
+msgid "Soni"
+msgstr "Count"
+
+#: app/models.py:111
+msgid "Uzunlik"
+msgstr "Length"
+
+#: app/models.py:112
+msgid "Kenglik"
+msgstr "Width"
+
+#: app/models.py:113
+msgid "Balanglik"
+msgstr "Height"
+
+#: app/models.py:116
+msgid "Standart kg"
+msgstr "Standard kg"
+
+#: app/models.py:117
+msgid "Og'irligi"
+msgstr "Weight"
+
+#: app/models.py:118
+msgid "Tovar narxi"
+msgstr "Product cost"
+
+#: app/models.py:119 app/resources.py:165
+msgid "Xizmat narxi"
+msgstr "Service price"
+
+#: app/models.py:120
+msgid "Umumiy"
+msgstr "General"
+
+#: app/models.py:122
+msgid "Uzb ga kelganmi?"
+msgstr "Did he come to Uzbek?"
+
+#: app/models.py:123
+msgid "Klientni qolidami?"
+msgstr "Is the client still there?"
+
+#: app/models.py:124
+msgid "Xitoy skladidami?"
+msgstr "Is it in a Chinese warehouse?"
+
+#: app/models.py:126 app/resources.py:190
+msgid "Daofu"
+msgstr "Daofu"
+
+#: app/models.py:169
+msgid "Tovar"
+msgstr "Good"
+
+#: app/models.py:170
+msgid "Tovarlar"
+msgstr "Goods"
+
+#: app/models.py:177
+msgid "Ссылка"
+msgstr "Link"
+
+#: app/models.py:180
+msgid "Referal"
+msgstr "Referral"
+
+#: app/models.py:181
+msgid "Referallar"
+msgstr "Referrals"
+
+#: app/models.py:195 app/models.py:198
+msgid "Izoh"
+msgstr "Comment"
+
+#: app/models.py:199
+msgid "Izohlar"
+msgstr "Comments"
+
+#: app/models.py:205
+msgid "Plus belgisi bilan jami 13 ta belgi bolishi kerak"
+msgstr "Must be 13 characters in total including the plus sign"
+
+#: app/models.py:211
+msgid "Telefon"
+msgstr "Phone"
+
+#: app/models.py:212
+msgid "Telefonlar"
+msgstr "Phones"
+
+#: app/models.py:217 app/models.py:223 app/models.py:224
+msgid "Aktiv telefon"
+msgstr "Active Phones"
+
+#: app/models.py:236
+msgid "O'zbekiston manzili 🇺🇿"
+msgstr "Uzbekistan address 🇺🇿"
+
+#: app/models.py:239
+msgid "O'zbekiston manzili 🇷🇺"
+msgstr "Uzbekistan address 🇷🇺"
+
+#: app/models.py:242
+msgid "Manzil"
+msgstr "Address"
+
+#: app/models.py:243
+msgid "Manzillar"
+msgstr "Addresses"
+
+#: app/product_proxy.py:10
+msgid "Egasi yo'q tovar"
+msgstr "Unowned goods"
+
+#: app/product_proxy.py:11
+msgid "Egasi yo'q tovarlar"
+msgstr "Goods without an owner"
+
+#: app/resources.py:15
+msgid "Telefon nomeri"
+msgstr "Phone number"
+
+#: app/resources.py:19
+msgid "Telefon nomeri (qo'sh)"
+msgstr "Phone number (optional)"
+
+#: app/resources.py:27
+msgid "Standartmi"
+msgstr "Is it standard?"
+
+#: app/resources.py:32
+msgid "Kg mi"
+msgstr "Is Kg"
+
+#: app/resources.py:37
+msgid "Standart narx"
+msgstr "Standard price"
+
+#: app/resources.py:42
+msgid "Refferal"
+msgstr "Referral"
+
+#: app/resources.py:69
+msgid "Transport xarajatlari"
+msgstr "Transportation costs"
+
+#: app/resources.py:74
+msgid "Soqlilar"
+msgstr "Taxes"
+
+#: app/resources.py:79
+msgid "Qo'shimcha. xarajatlar"
+msgstr "Additional costs"
+
+#: app/resources.py:84
+msgid "Kg"
+msgstr "Kg"
+
+#: app/resources.py:89
+msgid "Kim tomonidan"
+msgstr "By whom"
+
+#: app/resources.py:117
+msgid "Ro'yxatdan o'tmagan userni telefoni"
+msgstr "Unregistered user's phone number"
+
+#: app/resources.py:122
+msgid "Trek kodi"
+msgstr "Track code"
+
+#: app/resources.py:135
+msgid "Uzunligi"
+msgstr "Length"
+
+#: app/resources.py:140
+msgid "Kengligi"
+msgstr "Width"
+
+#: app/resources.py:145
+msgid "Balandligi"
+msgstr "Height"
+
+#: app/resources.py:150
+msgid "Standart og'irligi"
+msgstr "Standard weight"
+
+#: app/resources.py:155
+msgid "Sof vazni"
+msgstr "Net weight"
+
+#: app/resources.py:160
+msgid "Maxsulot narxi"
+msgstr "Product price"
+
+#: app/resources.py:175
+msgid "Uzb ga keldimi?"
+msgstr "Did it come to Uzbek?"
+
+#: app/resources.py:180
+msgid "Xitoyda emasmi?"
+msgstr "Not in China?"
+
+#: app/resources.py:185
+msgid "Klient olib kettimi?"
+msgstr "Did the client take it?"
+
+#: app/views.py:65
+msgid "Olib ketilgan"
+msgstr ""
+
+#: app/views.py:65
+msgid "Olib ketilmagan"
+msgstr ""
+
+#: root/settings.py:96
+msgid "English"
+msgstr "English"
+
+#: root/settings.py:97
+msgid "Russian"
+msgstr "Russian"
+
+#: root/settings.py:98
+msgid "Uzbek"
+msgstr "Uzbek"
+
+#: root/settings.py:99
+msgid "Chinese"
+msgstr "Chinese"
+
+#: root/urls.py:10
+#, fuzzy
+#| msgid "Fad cargo Administartsiyasi"
+msgid "❄️ Fad Cargo Administration ❄️"
+msgstr "Fad cargo Administration"
+
+#: root/urls.py:26
+msgid "Fad cargo Administartsiyasi"
+msgstr "Fad cargo Administration"
+
+#: root/urls.py:27
+msgid "Fad cargo admin ga xush kelibsiz!"
+msgstr "Welcome to Fad Cargo Admin!"
+
+#: templates/admin/app_list.html:9
+#, python-format
+msgid "Models in the %(name)s application"
+msgstr "Models in the %(name)s application"
+
+#: templates/admin/app_list.html:35
+msgid "Add"
+msgstr "Add"
+
+#: templates/admin/app_list.html:42
+msgid "View"
+msgstr "View"
+
+#: templates/admin/app_list.html:44
+msgid "Change"
+msgstr "Change"
+
+#: templates/admin/app_list.html:55
+msgid "You don’t have permission to view or edit anything."
+msgstr "You don’t have permission to view or edit anything."
+
+#: templates/admin/base_site.html:61
+msgid "Documentation"
+msgstr "Documentation"
+
+#: templates/admin/base_site.html:65
+msgid "Change password"
+msgstr "Change password"
+
+#: templates/admin/base_site.html:67
+msgid "Log out"
+msgstr "Log out"
+
+#~ msgid "Languages"
+#~ msgstr "Languages"

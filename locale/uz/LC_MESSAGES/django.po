@@ -1,0 +1,533 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-13 03:32+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/admin.py:56 app/admin.py:119
+msgid "Umumiy summa"
+msgstr ""
+
+#: app/admin.py:64
+msgid "Qo'shimcha telefon"
+msgstr ""
+
+#: app/admin.py:71 app/admin.py:88 app/admin.py:220
+msgid "Rasmi yo'q"
+msgstr ""
+
+#: app/admin.py:73
+msgid "Pasport old tomoni"
+msgstr ""
+
+#: app/admin.py:80
+msgid "Rasm yo'q"
+msgstr ""
+
+#: app/admin.py:82
+msgid "Pasport orqa tomoni"
+msgstr ""
+
+#: app/admin.py:93
+msgid "Rasmi"
+msgstr ""
+
+#: app/admin.py:112
+msgid "Jami tovarlar"
+msgstr ""
+
+#: app/admin.py:172 app/admin.py:277 app/views.py:47
+msgid "Yetib kelgan"
+msgstr ""
+
+#: app/admin.py:172 app/admin.py:277 app/views.py:47
+msgid "Yetib kelmagan"
+msgstr ""
+
+#: app/admin.py:173 app/admin.py:278
+msgid "Olib ketgan"
+msgstr ""
+
+#: app/admin.py:173 app/admin.py:278
+msgid "Olib ketmagan"
+msgstr ""
+
+#: app/admin.py:174 app/admin.py:279 app/views.py:83
+msgid "Xitoyda"
+msgstr ""
+
+#: app/admin.py:174 app/admin.py:279 app/views.py:83
+msgid "Xitoyda emas"
+msgstr ""
+
+#: app/admin.py:193 app/admin.py:298
+msgid "Holatini o'zgartirish"
+msgstr ""
+
+#: app/admin.py:200
+msgid "Egasining ID kodi"
+msgstr ""
+
+#: app/admin.py:207
+msgid "Egasining to'liq ismi"
+msgstr ""
+
+#: app/admin.py:214
+msgid "Egasining telefon raqami"
+msgstr ""
+
+#: app/admin.py:222
+msgid "Mahsulot fotosurati"
+msgstr ""
+
+#: app/admin.py:224 app/admin.py:243 app/admin.py:329 app/resources.py:170
+msgid "Jami"
+msgstr ""
+
+#: app/admin.py:313
+msgid "Partiyaning tovarlari"
+msgstr ""
+
+#: app/admin.py:322
+msgid "Umumiy og'irlik"
+msgstr ""
+
+#: app/admin.py:341 app/admin.py:361
+msgid "Aniq emas"
+msgstr ""
+
+#: app/admin.py:343 app/admin.py:355
+msgid "Umumiy xarajatlar"
+msgstr ""
+
+#: app/admin.py:363
+msgid "1 kg uchun"
+msgstr ""
+
+#: app/models.py:32 app/resources.py:11
+msgid "To'liq ismi"
+msgstr ""
+
+#: app/models.py:33 app/models.py:204
+msgid "Telefon raqam"
+msgstr ""
+
+#: app/models.py:34
+msgid "Telefon raqam 2"
+msgstr ""
+
+#: app/models.py:35
+msgid "Til"
+msgstr ""
+
+#: app/models.py:36
+msgid "Passport old tomoni"
+msgstr ""
+
+#: app/models.py:37
+msgid "Passport orqa tomoni"
+msgstr ""
+
+#: app/models.py:40 app/resources.py:23
+msgid "ID kod"
+msgstr ""
+
+#: app/models.py:43 app/models.py:125
+msgid "Rasm"
+msgstr ""
+
+#: app/models.py:44
+msgid "Standart mi?"
+msgstr ""
+
+#: app/models.py:45
+msgid "Kg mi?"
+msgstr ""
+
+#: app/models.py:47
+msgid "Maxsus narx"
+msgstr ""
+
+#: app/models.py:48
+msgid "Реферал"
+msgstr ""
+
+#: app/models.py:49
+msgid "Tip"
+msgstr ""
+
+#: app/models.py:69
+msgid "Foydalanuvchi"
+msgstr "Foydalanuvchi"
+
+#: app/models.py:70
+msgid "Foydalanuvchilar"
+msgstr "Foydalanuvchilar"
+
+#: app/models.py:75
+#, fuzzy
+#| msgid "Partiya"
+msgid "Partiya nomi"
+msgstr "Partiya"
+
+#: app/models.py:76 app/resources.py:55
+msgid "Sana"
+msgstr ""
+
+#: app/models.py:77 app/models.py:95 app/models.py:102 app/resources.py:60
+#: app/resources.py:106
+msgid "Partiya"
+msgstr "Partiya"
+
+#: app/models.py:78 app/resources.py:64
+msgid "Xarajatlar"
+msgstr ""
+
+#: app/models.py:80
+msgid "Transport xarajatlar"
+msgstr ""
+
+#: app/models.py:81
+msgid "Naloglar"
+msgstr ""
+
+#: app/models.py:83
+msgid "Qo'shimcha xarajatlar"
+msgstr ""
+
+#: app/models.py:85
+msgid "KG"
+msgstr ""
+
+#: app/models.py:86 app/models.py:194
+msgid "Kimdan"
+msgstr ""
+
+#: app/models.py:87 app/resources.py:93
+msgid "Kimga"
+msgstr ""
+
+#: app/models.py:88
+msgid "Yuan Dollar"
+msgstr ""
+
+#: app/models.py:89
+msgid "Dollar Sum"
+msgstr ""
+
+#: app/models.py:96
+#, fuzzy
+#| msgid "Partiya"
+msgid "Partiyalar"
+msgstr "Partiya"
+
+#: app/models.py:103 app/resources.py:111
+msgid "Egasi"
+msgstr ""
+
+#: app/models.py:107
+msgid "register bo'lmagan"
+msgstr ""
+
+#: app/models.py:108
+msgid "Trek kod"
+msgstr ""
+
+#: app/models.py:109 app/models.py:175 app/resources.py:126
+#: app/resources.py:213
+msgid "Nomi"
+msgstr ""
+
+#: app/models.py:110 app/models.py:176 app/resources.py:130
+msgid "Soni"
+msgstr ""
+
+#: app/models.py:111
+msgid "Uzunlik"
+msgstr ""
+
+#: app/models.py:112
+msgid "Kenglik"
+msgstr ""
+
+#: app/models.py:113
+msgid "Balanglik"
+msgstr ""
+
+#: app/models.py:116
+msgid "Standart kg"
+msgstr ""
+
+#: app/models.py:117
+msgid "Og'irligi"
+msgstr ""
+
+#: app/models.py:118
+msgid "Tovar narxi"
+msgstr ""
+
+#: app/models.py:119 app/resources.py:165
+msgid "Xizmat narxi"
+msgstr ""
+
+#: app/models.py:120
+msgid "Umumiy"
+msgstr ""
+
+#: app/models.py:122
+msgid "Uzb ga kelganmi?"
+msgstr ""
+
+#: app/models.py:123
+msgid "Klientni qolidami?"
+msgstr ""
+
+#: app/models.py:124
+msgid "Xitoy skladidami?"
+msgstr ""
+
+#: app/models.py:126 app/resources.py:190
+msgid "Daofu"
+msgstr ""
+
+#: app/models.py:169
+msgid "Tovar"
+msgstr ""
+
+#: app/models.py:170
+msgid "Tovarlar"
+msgstr ""
+
+#: app/models.py:177
+msgid "Ссылка"
+msgstr ""
+
+#: app/models.py:180
+msgid "Referal"
+msgstr ""
+
+#: app/models.py:181
+msgid "Referallar"
+msgstr ""
+
+#: app/models.py:195 app/models.py:198
+msgid "Izoh"
+msgstr ""
+
+#: app/models.py:199
+msgid "Izohlar"
+msgstr ""
+
+#: app/models.py:205
+msgid "Plus belgisi bilan jami 13 ta belgi bolishi kerak"
+msgstr ""
+
+#: app/models.py:211
+msgid "Telefon"
+msgstr ""
+
+#: app/models.py:212
+msgid "Telefonlar"
+msgstr ""
+
+#: app/models.py:217 app/models.py:223 app/models.py:224
+msgid "Aktiv telefon"
+msgstr ""
+
+#: app/models.py:236
+msgid "O'zbekiston manzili 🇺🇿"
+msgstr ""
+
+#: app/models.py:239
+msgid "O'zbekiston manzili 🇷🇺"
+msgstr ""
+
+#: app/models.py:242
+msgid "Manzil"
+msgstr ""
+
+#: app/models.py:243
+msgid "Manzillar"
+msgstr ""
+
+#: app/product_proxy.py:10
+msgid "Egasi yo'q tovar"
+msgstr ""
+
+#: app/product_proxy.py:11
+msgid "Egasi yo'q tovarlar"
+msgstr ""
+
+#: app/resources.py:15
+msgid "Telefon nomeri"
+msgstr ""
+
+#: app/resources.py:19
+msgid "Telefon nomeri (qo'sh)"
+msgstr ""
+
+#: app/resources.py:27
+msgid "Standartmi"
+msgstr ""
+
+#: app/resources.py:32
+msgid "Kg mi"
+msgstr ""
+
+#: app/resources.py:37
+msgid "Standart narx"
+msgstr ""
+
+#: app/resources.py:42
+msgid "Refferal"
+msgstr ""
+
+#: app/resources.py:69
+msgid "Transport xarajatlari"
+msgstr ""
+
+#: app/resources.py:74
+msgid "Soqlilar"
+msgstr ""
+
+#: app/resources.py:79
+msgid "Qo'shimcha. xarajatlar"
+msgstr ""
+
+#: app/resources.py:84
+msgid "Kg"
+msgstr ""
+
+#: app/resources.py:89
+msgid "Kim tomonidan"
+msgstr ""
+
+#: app/resources.py:117
+msgid "Ro'yxatdan o'tmagan userni telefoni"
+msgstr ""
+
+#: app/resources.py:122
+msgid "Trek kodi"
+msgstr ""
+
+#: app/resources.py:135
+msgid "Uzunligi"
+msgstr ""
+
+#: app/resources.py:140
+msgid "Kengligi"
+msgstr ""
+
+#: app/resources.py:145
+msgid "Balandligi"
+msgstr ""
+
+#: app/resources.py:150
+msgid "Standart og'irligi"
+msgstr ""
+
+#: app/resources.py:155
+msgid "Sof vazni"
+msgstr ""
+
+#: app/resources.py:160
+msgid "Maxsulot narxi"
+msgstr ""
+
+#: app/resources.py:175
+msgid "Uzb ga keldimi?"
+msgstr ""
+
+#: app/resources.py:180
+msgid "Xitoyda emasmi?"
+msgstr ""
+
+#: app/resources.py:185
+msgid "Klient olib kettimi?"
+msgstr ""
+
+#: app/views.py:65
+msgid "Olib ketilgan"
+msgstr ""
+
+#: app/views.py:65
+msgid "Olib ketilmagan"
+msgstr ""
+
+#: root/settings.py:96
+msgid "English"
+msgstr "Ingiliz"
+
+#: root/settings.py:97
+msgid "Russian"
+msgstr "Rus"
+
+#: root/settings.py:98
+msgid "Uzbek"
+msgstr "Uzbek"
+
+#: root/settings.py:99
+msgid "Chinese"
+msgstr "Xitoy"
+
+#: root/urls.py:10
+msgid "❄️ Fad Cargo Administration ❄️"
+msgstr ""
+
+#: root/urls.py:26
+msgid "Fad cargo Administartsiyasi"
+msgstr ""
+
+#: root/urls.py:27
+msgid "Fad cargo admin ga xush kelibsiz!"
+msgstr ""
+
+#: templates/admin/app_list.html:9
+#, python-format
+msgid "Models in the %(name)s application"
+msgstr "%(name)s ilovasidagi modellar"
+
+#: templates/admin/app_list.html:35
+msgid "Add"
+msgstr "Qo'shish"
+
+#: templates/admin/app_list.html:42
+msgid "View"
+msgstr "Ko'rish"
+
+#: templates/admin/app_list.html:44
+msgid "Change"
+msgstr "O'zgartirish"
+
+#: templates/admin/app_list.html:55
+msgid "You don’t have permission to view or edit anything."
+msgstr "Sizda biror narsani ko‘rish yoki tahrirlash uchun ruxsatingiz yo‘q."
+
+#: templates/admin/base_site.html:61
+msgid "Documentation"
+msgstr "Hujjatlar"
+
+#: templates/admin/base_site.html:65
+msgid "Change password"
+msgstr "Parolni o'zgartirish"
+
+#: templates/admin/base_site.html:67
+msgid "Log out"
+msgstr "Chiqish"
+
+#~ msgid "Languages"
+#~ msgstr "Tillar"
