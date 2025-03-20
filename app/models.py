@@ -11,7 +11,9 @@ from dotenv import load_dotenv
 
 LANGUAGE = (
     ('uz', "Uzbek"),
-    ('ru', "Russian")
+    ('ru', "Russian"),
+    ('en', "English"),
+    ('zh', "Chinese")
 )
 
 CONSIGNMENT = (
