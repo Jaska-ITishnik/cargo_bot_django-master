@@ -20,6 +20,7 @@ django-rosetta==0.10.1
 et-xmlfile==1.1.0
 idna==3.6
 kombu==5.4.2
+Levenshtein==0.27.1
 MarkupPy==1.14
 odfpy==1.4.1
 openpyxl==3.1.2
@@ -27,10 +28,14 @@ pillow==10.2.0
 polib==1.2.0
 prompt_toolkit==3.0.48
 psycopg2-binary==2.9.10
+python-barcode==0.15.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
+python-Levenshtein==0.27.1
 python-slugify==8.0.4
 PyYAML==6.0.1
+qrcode==8.0
+RapidFuzz==3.12.2
 requests==2.31.0
 six==1.17.0
 sqlparse==0.4.4

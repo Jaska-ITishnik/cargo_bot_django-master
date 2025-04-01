@@ -1,13 +1,15 @@
 from dal import autocomplete
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 
-from app.models import Product, User, Address
+from app.models import User, Address
 from utils import send_telegram_notification, taken_order, arrived, arrived_china
+from .models import Product
+from .utils import product_or_products
 
 
 @csrf_exempt
@@ -126,3 +128,17 @@ class OwnerAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(id_code__icontains=self.q)
 
         return qs
+
+
+# QR code view
+
+def product_detail_qrcode_cons(request, consignment_id):
+    products = Product.objects.filter(consignment_id=consignment_id)
+    contexts = [product_or_products(product) for product in products]
+    return render(request, 'qr_code.html', {"contexts": contexts})
+
+
+def product_detail_qrcode(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    context = product_or_products(product)
+    return render(request, 'qr_code.html', context)

@@ -125,7 +125,8 @@ class ProductAdmin(ImportExportActionModelAdmin):
         'consignment', 'user_id_code', 'unregistered_user_phone', 'trek_code', 'name', 'quantity', 'tall', 'width',
         'height',
         'standart_kg',
-        'own_kg', 'dafousi', 'Xizmat_narxi', 'daofu_calculation', 'user_full_name', 'phone_number', 'status',
+        'own_kg', 'dafousi', 'Xizmat_narxi', 'daofu_calculation', 'user_full_name', 'phone_number', 'print_button',
+        'status',
         'change_status_buttons', 'photo')
     list_display_links = ('user_id_code', 'trek_code', 'name')
     resource_class = ProductResource
@@ -145,6 +146,12 @@ class ProductAdmin(ImportExportActionModelAdmin):
 
     def get_queryset(self, request):
         return super().get_queryset(request).filter(user__isnull=False)
+
+    @admin.display(description="Print")
+    def print_button(self, obj: Product):
+        # Create a button that links to a custom view for printing
+        url = reverse('app:print_product', args=[obj.id])
+        return format_html('<a href="{}" target="_blank" class="button">Print</a>', url)
 
     def status(self, obj):
         res = ""
@@ -233,7 +240,8 @@ class NotRegisteredProductProxyModelAdmin(ImportExportActionModelAdmin):
     list_display = (
         'unregistered_user_phone', 'trek_code', 'name', 'quantity', 'tall', 'width', 'height',
         'standart_kg',
-        'own_kg', 'daofu', 'service_price', 'daofu_calculation', 'user_full_name', 'status', 'change_status_buttons'
+        'own_kg', 'daofu', 'service_price', 'daofu_calculation', 'user_full_name', 'print_button', 'status',
+        'change_status_buttons',
     )
     resource_class = ProductResource
 
@@ -250,6 +258,12 @@ class NotRegisteredProductProxyModelAdmin(ImportExportActionModelAdmin):
         if obj.user:
             return obj.user.full_name
         return "-"
+
+    @admin.display(description="Print")
+    def print_button(self, obj: Product):
+        # Create a button that links to a custom view for printing
+        url = reverse('app:print_product', args=[obj.id])
+        return format_html('<a href="{}" target="_blank" class="button">Print</a>', url)
 
     def status(self, obj):
         res = ""
@@ -301,7 +315,7 @@ class NotRegisteredProductProxyModelAdmin(ImportExportActionModelAdmin):
 @admin.register(CreatedAt)
 class CreatedAtAdmin(ImportExportActionModelAdmin):
     list_display = [
-        'batch_name', 'readies', 'date', 'consignment', 'expenses', 'transport_expenses',
+        'batch_name', 'print_button', 'readies', 'date', 'consignment', 'expenses', 'transport_expenses',
         'tax', 'add_expenses', 'summary_weight', 'kg', 'general_sum',
         'general_expenses', 'general_profit', 'kg1', 'from_who',
         'to_who', 'yuan_dollar', 'dollar_sum'
@@ -309,6 +323,12 @@ class CreatedAtAdmin(ImportExportActionModelAdmin):
     search_fields = 'batch_name',
     list_filter = 'date', 'consignment'
     resource_class = CreatedAtResource
+
+    @admin.display(description="Print")
+    def print_button(self, obj: CreatedAt):
+        # Create a button that links to a custom view for printing
+        url = reverse('app:print_product_consignment', args=[obj.id])
+        return format_html('<a href="{}" target="_blank" class="button">Print</a>', url)
 
     @admin.display(description=_('Partiyaning tovarlari'))
     def readies(self, obj: CreatedAt):
