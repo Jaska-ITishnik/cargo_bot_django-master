@@ -1,0 +1,192 @@
+<!-- templates/print_product.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Print Product</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: start;
+            gap: 5mm;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Layout adapts based on number of contexts */
+        .container {
+            width: 90mm;
+            height: 100mm;
+            padding: 5mm;
+            border: 1px solid #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            page-break-inside: avoid;
+        }
+
+        /* If there's only one context, center it */
+        @media screen and (max-width: 100mm) {
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .container {
+                width: 90mm;
+                height: 100mm;
+            }
+        }
+
+        /* Barcode Styles */
+        .barcode {
+            width: 100%;
+            text-align: center;
+        }
+
+        .barcode img {
+            width: 50mm;
+            height: 15mm;
+        }
+
+        /* Info Frame */
+        .info-frame {
+            width: 100%;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Table */
+        .info-table {
+            width: 100%;
+            font-size: 8px;
+            border-collapse: collapse;
+        }
+
+        .info-table th, .info-table td {
+            padding: 2px;
+            border: 1px solid #000;
+            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* QR Code inside the frame, bottom-right */
+        .qr-code {
+            width: 20mm;
+            height: 20mm;
+            position: absolute;
+            bottom: -5mm;
+            right: -5mm;
+        }
+
+        /* Print settings */
+        @media print {
+            body {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(90mm, 1fr));
+                gap: 5mm;
+                justify-content: center;
+                align-items: start;
+            }
+
+            .container {
+                page-break-inside: avoid;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+{% if contexts %}
+    {% for context in contexts %}
+        <div class="container">
+            <!-- Barcode -->
+            <div class="barcode">
+                <img src="data:image/png;base64,{{ context.barcode_base64 }}" alt="Barcode">
+                <div class="id">{{ context.product.id }}</div>
+            </div>
+
+            <!-- Info Frame with Table -->
+            <div class="info-frame">
+                <table class="info-table">
+                    <tr>
+                        <th colspan="2">
+                            {% if context.product.name %}
+                                {{ context.product.name }}<br>Fad Cargo
+                            {% else %}
+                                Fad Cargo
+                            {% endif %}
+                        </th>
+                    </tr>
+                    {% for value in context.data.values %}
+                        <tr>
+                            <td>{{ value.description }}:</td>
+                            <td>{{ value.value }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <!-- QR Code -->
+            <div class="qr-code">
+                <img src="data:image/png;base64,{{ context.qr_code_base64 }}" alt="QR Code"
+                     style="width: 50px; height: 50px;">
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="container">
+        <!-- Barcode -->
+        <div class="barcode">
+            <img src="data:image/png;base64,{{ barcode_base64 }}" alt="Barcode">
+            <div class="id">{{ product.id }}</div>
+        </div>
+
+        <!-- Info Frame with Table -->
+        <div class="info-frame">
+            <table class="info-table">
+                <tr>
+                    <th colspan="2">
+                        {% if product.name %}
+                            {{ product.name }}<br>Fad Cargo
+                        {% else %}
+                            Fad Cargo
+                        {% endif %}
+                    </th>
+                </tr>
+                {% for value in data.values %}
+                    <tr>
+                        <td>{{ value.description }}:</td>
+                        <td>{{ value.value }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <!-- QR Code -->
+        <div class="qr-code">
+            <img src="data:image/png;base64,{{ qr_code_base64 }}" alt="QR Code" style="width: 50px; height: 50px;">
+        </div>
+    </div>
+{% endif %}
+<script>
+    window.onload = function () {
+        window.print();
+    };
+</script>
+</body>
+</html>

@@ -31,8 +31,8 @@ taken_order = {
 
 
 def send_telegram_notification(text, chat_id, photo_path=None):
-    token = '7139094213:AAF1g3Gmfk0Zt1ERV-XolSATn5fqEoPYI_E'
-    # token = '7510074118:AAGiuncdv44_TFuvmeJ-vekE4yRwuDx9LcI'
+    # token = '7139094213:AAF1g3Gmfk0Zt1ERV-XolSATn5fqEoPYI_E'
+    token = '7510074118:AAGiuncdv44_TFuvmeJ-vekE4yRwuDx9LcI'
     base_url = f'https://api.telegram.org/bot{token}/'
 
     if photo_path:
